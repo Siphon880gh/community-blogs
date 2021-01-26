@@ -96,6 +96,25 @@ Each post has post owner, title, content.`);
 
 }); // beforeAll
 
+describe('Test posts', () => {
+
+    test('Three posts', () => {
+        expect(global.posts.length).toBe(3);
+    });
+
+    test('Last post has correct fields', () => {
+        const lastRow = global.posts[global.posts.length - 1];
+        expect(lastRow.title).toBe("title 3");
+        expect(lastRow.content).toBe("content 3");
+    });
+
+    test('Last post has correctly joined username', () => {
+        const lastRow = global.posts[global.posts.length - 1];
+        expect(lastRow.username).toBe("testUser3");
+    });
+
+});
+
 afterAll(async() => {
     await sequelizeConnection.close();
 })
