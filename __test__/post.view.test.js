@@ -149,6 +149,30 @@ All comments listed as well.`);
 
 }); // afterAll
 
+describe('Test findOne post', () => {
+
+    test('Post has correct fields', () => {
+        expect(global.onePost.title).toBe("title 1");
+        expect(global.onePost.content).toBe("content 1");
+    });
+
+    test('Post has correctly joined username', () => {
+        expect(global.onePost.username).toBe("testUser");
+    });
+
+    test('Post has 1 comment', () => {
+        expect(global.onePost.comments.length).toBe(1);
+    });
+
+    test('Comment has correct fields', () => {
+        expect(global.onePost.comments[0].content).toBe("comment 1");
+    });
+
+    test('Comment has correctly joined username', () => {
+        expect(global.onePost.comments[0].username).toBe("testUser2");
+    });
+});
+
 afterAll(async() => {
     await sequelizeConnection.close();
 })
