@@ -4,7 +4,6 @@ const path = require("path");
 const sequelizeConnection = require("../config/connection.js");
 
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
 
 console.log(`Simulation:
 - User visits Homepage. 
