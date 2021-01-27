@@ -175,4 +175,5 @@ describe('Test findOne post', () => {
 
 afterAll(async() => {
     await sequelizeConnection.close();
-})
+    console.info("\x1b[45m%s", " Test2 requires you to drop database between test suites. Test each test suite individually. Example: `npm run test2 post.view`");
+});

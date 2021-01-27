@@ -3,11 +3,15 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "jest": {
+        "testMatch": ["**/__test__/**/*.test.js"]
+    },
     "scripts": {
         "start": "node server.js",
         "seed": "node seeds/",
         "watch": "nodemon server.js",
-        "test": "jest"
+        "test": "jest",
+        "test2": "jest --config ./jest.test2.config.json"
     },
     "author": "",
     "license": "ISC",

@@ -20,12 +20,12 @@ beforeAll(async() => {
         console.log("2a. Sequelize Resynced.");
 
         console.log("2b. Mock logged in user");
-        global.userSession = {
+        global.user = {
             userId: 1,
             username: "testUser"
         }
         global.loggedIn = 1;
-        console.log({ loggedIn: global.loggedIn, userSession: global.userSession });
+        console.log({ loggedIn: global.loggedIn, user: global.user });
     });
 
     console.log(`3. Create associations: Each post has post owner, title, content`);
@@ -88,7 +88,7 @@ Each post has post owner, title, content.`);
     global.posts = await Post.findAll({
         // attributes: ["id"]
         where: {
-            user_id: global.userSession.userId
+            user_id: global.user.userId
         },
         include: {
             model: User
@@ -137,4 +137,5 @@ describe('Test posts by loggged in user', () => {
 
 afterAll(async() => {
     await sequelizeConnection.close();
-})
+    console.info("\x1b[45m%s", " Test2 requires you to drop database between test suites. Test each test suite individually. Example: `npm run test2 post.view`");
+});

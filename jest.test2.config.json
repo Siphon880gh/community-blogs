@@ -1,0 +1,5 @@
+{
+    "jest": {
+        "testMatch": ["**/__test2__/**/*.test.js"]
+    }
+}
