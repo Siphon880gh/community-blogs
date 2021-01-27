@@ -112,6 +112,31 @@ Each post has post owner, title, content.`);
 
 }); // beforeAll
 
+describe('Test posts by loggged in user', () => {
+
+    test('User is authorized', () => {
+        // If false on runtime: Send a 401 Unauthorized response and redirect to login route
+        expect(global.loggedIn).toBe(1);
+    });
+
+    test('Two posts', () => {
+        expect(global.posts.length).toBe(2);
+    });
+
+    test('Each post has correct fields', () => {
+        expect(global.posts[0].title).toBe("title 1");
+        expect(global.posts[0].content).toBe("content 1");
+        expect(global.posts[1].title).toBe("title 1b");
+        expect(global.posts[1].content).toBe("content 1b");
+    });
+
+    test('All posts are owned by user', () => {
+        expect(global.posts[0].username).toBe("testUser");
+        expect(global.posts[1].username).toBe("testUser");
+    });
+
+});
+
 afterAll(async() => {
     await sequelizeConnection.close();
 })
