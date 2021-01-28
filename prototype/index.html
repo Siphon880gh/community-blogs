@@ -57,7 +57,18 @@
         <section id="homepage" class="d-none" data-view data-info="/dashboard ">
             <article></article>
             <template>
-                {{a}}
+                <ul>
+                    {{#each posts}}
+                        <li>
+                            <span>{{title}}</span>
+                            <span>{{username}}</span>
+                            <span>{{date createdAt}}</span>
+                            <span>{{content}}</span>
+                            <span>Attr:UserId:{{user_id}}</span>
+                            <span>Attr:PostId:{{id}}</span>
+                        </li>
+                    {{/each}}
+                </ul>
             </template>
         </section>
         <section id="dashboard" class="d-none" data-view data-info="/dashboard ">

@@ -10,9 +10,21 @@ function parseHash(newHash, oldHash) {
     crossroads.parse(newHash);
     switch (newHash) {
         case "homepage/":
-            res.render("#homepage", {
-                a: 1
-            })
+            $.get("mocks/homepage/posts.json", (data) => {
+                const postsWrapper = {
+                    posts: data
+                };
+                const helpersArr = [{
+                    name: "date",
+                    fxn: function(options) {
+                        const sqlDate = options;
+                        const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+                        return humanDate;
+                    }
+                }]
+
+                res.render("#homepage", postsWrapper, helpersArr);
+            });
             break;
         case "dashboard/":
             $.get("mocks/dashboard/posts.json", (data) => {
@@ -29,7 +41,7 @@ function parseHash(newHash, oldHash) {
                 }]
 
                 res.render("#dashboard", postsWrapper, helpersArr);
-            })
+            });
             break;
         case "login/":
             break;

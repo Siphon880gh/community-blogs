@@ -108,7 +108,7 @@ Each post has post owner, title, content.`);
         console.log({ err });
     });
 
-    // console.log({ posts: global.posts });
+    // console.log(JSON.stringify(global.posts));
 
 }); // beforeAll
 
