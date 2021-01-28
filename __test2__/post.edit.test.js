@@ -10,7 +10,7 @@ var app = express();
 require('mysql2/node_modules/iconv-lite').encodingExists('cesu8');
 
 console.log(`Simulation:
-- User posts.`);
+- User edits post.`);
 
 beforeAll(async() => {
     console.log("1. Cue the models");
@@ -27,12 +27,19 @@ beforeAll(async() => {
         email: 'testUser@domain.com',
         password: 'testUser'
     }]);
+    console.log("2b. Seed the post");
+    Post.bulkCreate([{
+        title: 'title 1p', // id 1
+        content: 'content 1p',
+        user_id: 1
+    }]);
 
-    console.log("3. Prepare express route POST /posts");
+    console.log("3. Prepare express route PUT /posts/:postId");
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
 
-    app.post("/posts", async(req, res) => {
+    app.put("/posts/:postId", async(req, res) => {
+        const { postId } = req.params;
         const { title, content } = req.body;
 
         // Mock session
@@ -40,30 +47,51 @@ beforeAll(async() => {
         req.session.user = {}; // Remove line when refactored into production code
         const userId = req.session.user.id = 1;
 
-        const success = await Post.create({
-            title,
-            content
-        }, {
+        // This request can fail for reasons of unauthorized editing or database error
+        let fail = false;
+
+        // Can the current user edit this post?
+        const isAllowedEdit = await Post.findOne({
             where: {
-                user_id: userId
+                user_id: userId,
+                id: postId
             }
+        }).then(row => {
+            if (row) row = row.get({ plain: true });
+            return row;
         });
-        if (success) {
-            // res.redirect("/homepage");
-            // console.log({ success })
-            res.json({ success: 1 });
+        if (isAllowedEdit) {
+            // Then save the post edit
+            const success = await Post.update({
+                title,
+                content
+            }, {
+                where: {
+                    user_id: userId,
+                    id: postId
+                }
+            });
+            if (!success)
+                fail = true;
         } else {
-            res.json({ success: 0 });
+            fail = true;
         }
 
-    });
+        // If user has no permission or post edit fails
+        if (fail)
+            res.status(403).json({ success: 0 });
+        else
+            res.json({ success: 1 });
+
+    }); // put
 
 }); // beforeAll
 
-describe('Testing making a post', () => {
+describe('Testing editing a post', () => {
 
-    test('Test making a post', async() => {
-        const response = await request(app).post('/posts').send({ title: "title 1p", content: "content 1p" });
+    test('Test editing a post', async() => {
+        const response = await request(app).put('/posts/1').send({ title: "title 1pe", content: "content 1pe" });
+        // console.log({ response })
         expect(JSON.parse(response.text).success).toBe(1);
     });
 
