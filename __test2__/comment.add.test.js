@@ -85,5 +85,5 @@ describe('Testing adding a comment to a post by requesting POST /posts/1/comment
 
 afterAll(async() => {
     await sequelizeConnection.close();
-    console.info("\x1b[45m%s", " Test2 requires you to drop database between test suites. Test each test suite individually. Example: `npm run test2 post.view`");
+    console.info("\x1b[45m%s", " Test2 requires you to drop database between test suites. Test each test suite individually. Otherwise, tests will fail. Example: `npm run test2 post.view`");
 });
