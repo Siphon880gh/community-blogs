@@ -93,6 +93,8 @@ Each post has post owner, title, content.`);
         console.log({ err });
     });
 
+    // console.log(JSON.stringify(global.posts));
+
 }); // beforeAll
 
 describe('Test posts', () => {
