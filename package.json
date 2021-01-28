@@ -4,7 +4,11 @@
     "description": "",
     "main": "index.js",
     "jest": {
-        "testMatch": ["**/__test__/**/*.test.js"]
+        "testMatch": [
+            "**/__test__/**/*.test.js"
+        ],
+        "testEnvironment": "node",
+        "info-testEnvironment": "So can mock session in test because of error 'Consider using the node test environment.'. Ignore if this is a Validation Warning."
     },
     "scripts": {
         "start": "node server.js",
@@ -17,14 +21,18 @@
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.0.0",
+        "connect-session-sequelize": "^7.1.0",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-handlebars": "^5.2.0",
+        "express-session": "^1.17.1",
         "mysql2": "^2.2.5",
         "sequelize": "^6.4.0"
     },
     "devDependencies": {
+        "iconv-lite": "^0.6.2",
         "jest": "^26.6.3",
-        "nodemon": "^2.0.7"
+        "nodemon": "^2.0.7",
+        "supertest": "^6.1.3"
     }
 }
