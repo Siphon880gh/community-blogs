@@ -108,6 +108,8 @@ Each post has post owner, title, content.`);
         console.log({ err });
     });
 
+    // console.log({ posts: global.posts });
+
 }); // beforeAll
 
 describe('Test posts by loggged in user', () => {
