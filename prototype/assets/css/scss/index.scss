@@ -1,0 +1,30 @@
+/* Reset CSS */
+
+ :root {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Color Themes */
+
+.container {
+    --brown: #231010;
+    --darkgray: #666666;
+    --lightgray: #a7a7a7;
+    --lime: #d9ead3;
+}
+
+body {
+    background-color: var(--lime);
+}
+
+
+/* Mobile-first approach */
+
+@media (min-width: 480px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 1200px) {}
