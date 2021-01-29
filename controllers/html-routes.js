@@ -2,7 +2,26 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 
+// Workaround when you're at /post/:postId, and clicking another link like /dashboard goes to /post/dashboard
+// Then it will redirect one level up to get rid of /post so you can arrive to /dashboard
+router.get('/posts/posts', (req, res) => {
+    res.redirect("../posts");
+    return;
+});
+router.get('/posts/login', (req, res) => {
+    res.redirect("../login");
+    return;
+});
+router.get('/posts/signup', (req, res) => {
+    res.redirect("../signup");
+    return;
+});
+router.get('/posts/dashboard', (req, res) => {
+    res.redirect("../dashboard");
+    return;
+});
 
+// The actual html routes
 router.get('/', async(req, res) => {
     // Whether or not logged in, you can view posts on this public blog
 
