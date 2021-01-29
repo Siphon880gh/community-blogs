@@ -117,6 +117,30 @@ crossroads.addRoute('posts/{postId}/edit')
         }); // ajax
     }); // matched
 
+// Preview post before deciding to edit or delete
+crossroads.addRoute('posts/{postId}/preview')
+    .matched.add((postId) => {
+        console.log('Route', 'posts/{postId}/preview');
+        // When refactored: postId will be in Post.findAll.. WHERE
+        // As prototype: We will just grab postId=1 regardless
+        $.get("mocks/post-preview/post.json", (data) => {
+            const postStraightThrough = data;
+            postStraightThrough.pageTitle = "The Tech Blog";
+            const helpersArr = [{
+                name: "date",
+                fxn: function(options) {
+                    const sqlDate = options;
+                    const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+                    return humanDate;
+                }
+            }];
+            // debugger;
+
+            // Render with data context and helpers
+            res.render("#post-preview", postStraightThrough, helpersArr);
+        }); // ajax
+    }); // matched
+
 crossroads.addRoute('DELETE/api/posts/{postId}')
     .matched.add((postId) => {
         console.log("DELETE/api/posts/{postId}");

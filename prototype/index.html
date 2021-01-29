@@ -87,7 +87,7 @@
                     {{#each posts}}
                     <div class="dashboard-post-wrapper" data-postid="{{id}}" data-userid="{{user_id}}">
                         <header class="post-header">
-                            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.dashboard-post-wrapper').dataset.postid);">{{title}}</a>
+                            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.dashboard-post-wrapper').dataset.postid + '/preview');">{{title}}</a>
                             <aside>
                                 {{date createdAt}}
                             </aside>
@@ -107,7 +107,7 @@
                 <div class="posts-wrapper">
                     <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
                         <header class="post-header">
-                            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.post-wrapper').dataset.postid + '/edit');">{{title}}</a>
+                            <span>{{title}}</span>
                             <aside>
                                 Posted by {{username}} on {{date createdAt}}
                             </aside>
@@ -149,6 +149,34 @@
                 </ul>
             </template>
         </section>
+        <section id="post-preview" class="d-none" data-view data-info="/post/:postId/preview -> PUT /post/:postId, DELETE /post/:postId">
+            <article></article>
+            <template>
+                <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
+                <div class="posts-wrapper">
+                    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
+                        <header class="post-header">
+                            Editing
+                        </header>
+                        <div class="post-body">
+                            <div class="input-group">
+                                <label for="username-login">Title:</label>
+                              <input type="text" class="editing" value="{{title}}"></input>
+                            </div>
+                            <div class="input-group">
+                                <label for="username-login">Content:</label>
+                                <textarea class="editing">{{content}}</textarea>
+                            </div>
+                            <div class="preview-buttons">
+                                <button class="update-post standout" onclick="alert('Prototype: Would update post at PUT /posts/:postId')">Update Post</button>
+                                <button class="delete-post standout" onclick="alert('Prototype: Would delete post at DELETE /posts/:postId')">Delete</button>
+                            </div>
+                        </div> <!-- post-body -->
+
+                    </div> <!-- post-wrapper -->
+                </div> <!-- posts-wrapper -->
+            </template>
+        </section>
         <section id="login" class="d-none" data-view data-info="/login">
             <article></article>
             <template>
@@ -168,7 +196,7 @@
                               <input type="password" id="password-login" />
                             </div>
                             <div>
-                              <button type="submit">Login</button>
+                              <button class="standout" type="submit">Login</button>
                               <a href="javascript:void(0);" onclick="hasher.setHash('signup/')">Sign up instead</a>
                             </div>
                           </form>
@@ -195,7 +223,7 @@
                             <input type="password" id="password-signup" />
                             </div>
                             <div>
-                            <button type="submit">Sign Up!</button>
+                            <button class="standout" type="submit">Sign Up!</button>
                             <a href="javascript:void(0);" onclick="hasher.setHash('login/')">Login instead</a>
                             </div>
                         </form>

@@ -51,6 +51,20 @@ body {
     padding-right: 15px;
 }
 
+button.standout {
+    width: 100%;
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--darkgray);
+    color: white;
+    transition: background-color 500ms;
+}
+
+button.standout:hover {
+    background-color: var(--lightgray);
+}
+
 
 /** Header **/
 
@@ -123,18 +137,6 @@ body {
     .input-group {
         margin: 10px 0;
     }
-    button {
-        width: 100%;
-        margin: 10px 0;
-        padding: 5px;
-        border-radius: 5px;
-        background-color: var(--darkgray);
-        color: white;
-        transition: background-color 500ms;
-    }
-    button:hover {
-        background-color: var(--lightgray);
-    }
 }
 
 
@@ -193,11 +195,16 @@ body {
 }
 
 
-/* Homepage / View Post */
+/* Homepage / View Post / Preview Post */
 
 .posts-wrapper {
     .post-wrapper {
         margin-top: 20px;
+        .editing {
+            padding: 5px 10px;
+            width: 100%;
+            resize: none;
+        }
         .post-header,
         .comment-header {
             padding: 5px 10px;
@@ -237,6 +244,14 @@ body {
         }
         .comment-footer {
             margin-top: 1rem;
+        }
+        .preview-buttons {
+            button {
+                margin: 5px 0;
+                &:first-child {
+                    margin-top: 10px;
+                }
+            }
         }
     }
 }
