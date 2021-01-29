@@ -1,6 +1,6 @@
 <!--
     WARNING: Not meant for production. This is a prototype to help the developer divide html into templates, to come up with routes for the app's features, and to figure out the JS logic and CSS.
-    WARNING: Not meant for production. Mock data is used. Handlebars front version is used. Routing is used with Crossroads JS. Compass is used. jQyery is used. This is for prototyping.
+    WARNING: Not meant for production. Mock data is used. Handlebars front version is used. Routing is used with Crossroads JS. Compass is used. jQuery is used. This is for prototyping.
     WARNING: Production code is in /public.
 -->
 <!DOCTYPE html>
@@ -104,26 +104,35 @@
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <ul>
-                        <li>
-                            <span>{{title}}</span>
-                            <span>{{username}}</span>
-                            <span>{{date createdAt}}</span>
-                            <span>{{content}}</span>
-                            <span>Attr:userId:{{userId}}</span>
-                            <span>Attr:postId:{{id}}</span>
-                            <ul>
+                <div class="posts-wrapper">
+                    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
+                        <header class="post-header">
+                            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.post-wrapper').dataset.postid + '/edit');">{{title}}</a>
+                            <aside>
+                                Posted by {{username}} on {{date createdAt}}
+                            </aside>
+                        </header>
+                        <div class="post-body">
+                            {{content}}
+                        </div> <!-- post-body -->
+                        <div class="comments-wrapper" data-userid="{{userId}}">
                                 {{#each comments}}
-                                <li>
-                                    <span>{{content}}</span>
-                                    <span>{{username}}</span>
-                                    <span>{{date createdAt}}</span>
-                                    <span>Attr:userId:{{userId}}</span>
-                                </li>
+                                    <div class="comment-wrapper">
+                                        <div class="comment-header">&nbsp;</div>
+                                        <div class="comment__body__footer">
+                                            <div>{{content}}</div>
+                                            <footer class="comment-footer">
+                                                — {{username}}, {{date createdAt}}
+                                            </footer>
+                                        </div>
+                                    </div>
                                 {{/each}}
+                                </li>
                             </ul>
-                        </li>
-                </ul>
+                        </div>
+
+                    </div> <!-- post-wrapper -->
+                </div> <!-- posts-wrapper -->
             </template>
         </section>
         <section id="post-edit" class="d-none" data-view data-info="PUT /post/:postId">
