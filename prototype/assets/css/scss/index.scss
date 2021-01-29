@@ -122,6 +122,45 @@ body {
     }
 }
 
+
+/* Dashboard */
+
+.dashboard-posts-wrapper {
+    .dashboard-post-wrapper {
+        margin-top: 20px;
+        .post-header {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: var(--lime);
+            background-color: var(--darkgray);
+            font-size: 1rem;
+            font-weight: 300;
+            a,
+            a:visited {
+                color: var(--lime);
+            }
+            a:active,
+            a:hover {
+                color: var(--brown);
+            }
+            aside {
+                float: right;
+                font-weight: 300;
+            }
+        }
+        .post-body {
+            border: 2px solid var(--brown);
+            padding: 5px 10px 5px 10px;
+            input {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+/* Homepage */
+
 .posts-wrapper {
     .post-wrapper {
         margin-top: 20px;
