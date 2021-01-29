@@ -95,7 +95,7 @@
                     </div> <!-- dashboard-post-wrapper -->
                     {{/each}}
                     <footer class="dashboard-btn-wrapper">
-                        <button onclick="hasher.setHash('posts/' + this.closest('.dashboard-post-wrapper' + '/edit').dataset.postid);">+ New Post</button>  
+                        <button onclick="hasher.setHash('posts/new');">+ New Post</button>  
                     </footer>
                 </div> <!-- dashboard-posts-wrapper -->
             </template>
@@ -143,18 +143,31 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="post-edit" class="d-none" data-view data-info="PUT /post/:postId">
+        <section id="post-new" class="d-none" data-view data-info="POST /posts">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <ul>
-                        <li>
-                            <span>{{title}}</span>
-                            <span>{{content}}</span>
-                            <span>Attr:userId:{{userId}}</span>
-                            <span>Attr:postId:{{id}}</span>
-                        </li>
-                </ul>
+                <div class="posts-wrapper">
+                    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
+                        <header class="post-header">
+                            Create New Post
+                        </header>
+                        <div class="post-body">
+                            <div class="input-group">
+                                <label for="edit-title">Title:</label>
+                                <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
+                            </div>
+                            <div class="input-group">
+                                <label for="edit-content">Content:</label>
+                                <textarea id="edit-content" class="editing">{{content}}</textarea>
+                            </div>
+                            <div class="preview-buttons">
+                                <button class="update-post standout" onclick="alert('Prototype: Would create post at POST /posts')">Create</button>
+                            </div>
+                        </div> <!-- post-body -->
+
+                    </div> <!-- post-wrapper -->
+                </div> <!-- posts-wrapper -->
             </template>
         </section>
         <section id="post-preview" class="d-none" data-view data-info="/post/:postId/preview -> PUT /post/:postId, DELETE /post/:postId">
@@ -164,7 +177,7 @@
                 <div class="posts-wrapper">
                     <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
                         <header class="post-header">
-                            Editing
+                            Edit Post
                         </header>
                         <div class="post-body">
                             <div class="input-group">

@@ -72,6 +72,19 @@ crossroads.addRoute('logout')
         alert("Prototype: Would be logging out.");
     });
 
+// This route must be placed before posts/:postId
+crossroads.addRoute('posts/new')
+    .matched.add(() => {
+        console.log('Route', 'posts/new');
+
+        var genericData = {
+            pageTitle: "Dashboard"
+        }
+
+        // Render with data context and helpers
+        res.render("#post-new", genericData);
+    }); // matched
+
 crossroads.addRoute('posts/{postId}')
     .matched.add((postId) => {
         // When refactored: postId will be in Post.findAll.. WHERE
@@ -91,29 +104,6 @@ crossroads.addRoute('posts/{postId}')
 
             // Render with data context and helpers
             res.render("#post-view", postStraightThrough, helpersArr);
-        }); // ajax
-    }); // matched
-
-crossroads.addRoute('posts/{postId}/edit')
-    .matched.add((postId) => {
-        console.log('Route', 'posts/{postId}/edit');
-        // When refactored: postId will be in Post.findAll.. WHERE
-        // As prototype: We will just grab postId=1 regardless
-        $.get("mocks/post-edit/post.json", (data) => {
-            const postStraightThrough = data;
-            postStraightThrough.pageTitle = "The Tech Blog";
-            const helpersArr = [{
-                name: "date",
-                fxn: function(options) {
-                    const sqlDate = options;
-                    const humanDate = moment(sqlDate).format("MM/DD/YYYY")
-                    return humanDate;
-                }
-            }];
-            // debugger;
-
-            // Render with data context and helpers
-            res.render("#post-edit", postStraightThrough, helpersArr);
         }); // ajax
     }); // matched
 
