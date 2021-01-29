@@ -146,6 +146,7 @@ All comments listed as well.`);
 
     // console.log(global.onePost);
     // console.log(global.onePost.comments[0].username);
+    // console.log(JSON.stringify(global.onePost));
 
 }); // afterAll
 
