@@ -111,4 +111,11 @@ router.get('/login', (req, res) => {
     res.render("login", postStraightThrough);
 });
 
+router.get('/signup', (req, res) => {
+    let postStraightThrough = {};
+    postStraightThrough.pageTitle = "The Tech Blog";
+
+    res.render("signup", postStraightThrough);
+});
+
 module.exports = router;
