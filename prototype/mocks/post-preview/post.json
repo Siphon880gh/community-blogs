@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "userId": 1,
+    "title": "title 1",
+    "content": "content 1",
+    "createdAt": "2021-01-29T00:11:17.000Z",
+    "updatedAt": "2021-01-29T00:11:17.000Z",
+    "username": "testUser"
+}

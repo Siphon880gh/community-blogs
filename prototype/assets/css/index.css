@@ -40,6 +40,20 @@ body {
   padding-right: 15px;
 }
 
+button.standout {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--darkgray);
+  color: white;
+  transition: background-color 500ms;
+}
+
+button.standout:hover {
+  background-color: var(--lightgray);
+}
+
 /** Header **/
 .site-header {
   padding: 0;
@@ -109,18 +123,6 @@ body {
 .form-wrapper .input-group {
   margin: 10px 0;
 }
-.form-wrapper button {
-  width: 100%;
-  margin: 10px 0;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: var(--darkgray);
-  color: white;
-  transition: background-color 500ms;
-}
-.form-wrapper button:hover {
-  background-color: var(--lightgray);
-}
 
 /* Dashboard */
 .dashboard-posts-wrapper .dashboard-post-wrapper {
@@ -173,9 +175,14 @@ body {
   color: var(--lightgray);
 }
 
-/* Homepage / View Post */
+/* Homepage / View Post / Preview Post */
 .posts-wrapper .post-wrapper {
   margin-top: 20px;
+}
+.posts-wrapper .post-wrapper .editing {
+  padding: 5px 10px;
+  width: 100%;
+  resize: none;
 }
 .posts-wrapper .post-wrapper .post-header,
 .posts-wrapper .post-wrapper .comment-header {
@@ -222,4 +229,10 @@ body {
 }
 .posts-wrapper .post-wrapper .comment-footer {
   margin-top: 1rem;
+}
+.posts-wrapper .post-wrapper .preview-buttons button {
+  margin: 5px 0;
+}
+.posts-wrapper .post-wrapper .preview-buttons button:first-child {
+  margin-top: 10px;
 }
