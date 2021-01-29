@@ -56,9 +56,24 @@ crossroads.addRoute('logout')
 
 crossroads.addRoute('posts/{postId}')
     .matched.add((postId) => {
-        debugger;
-        alert("Viewing post 1");
-    });
+        // When refactored: postId will be in Post.findAll.. WHERE
+        // As prototype: We will just grab postId=1 regardless
+        $.get("mocks/post-view/post.json", (data) => {
+            const postStraightThrough = data;
+            const helpersArr = [{
+                name: "date",
+                fxn: function(options) {
+                    const sqlDate = options;
+                    const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+                    return humanDate;
+                }
+            }];
+            // debugger;
+
+            // Render with data context and helpers
+            res.render("#post-view", postStraightThrough, helpersArr);
+        }); // ajax
+    }); // matched
 
 
 // parseHash is an handler for on history state onready and onchange

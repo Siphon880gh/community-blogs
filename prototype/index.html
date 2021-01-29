@@ -65,8 +65,8 @@
                             <span>{{username}}</span>
                             <span>{{date createdAt}}</span>
                             <span>{{content}}</span>
-                            <span>Attr:UserId:{{user_id}}</span>
-                            <span>Attr:PostId:{{id}}</span>
+                            <span>Attr:userId:{{user_id}}</span>
+                            <span>Attr:postId:{{id}}</span>
                         </li>
                     {{/each}}
                 </ul>
@@ -80,8 +80,8 @@
                         <li>
                             <span>{{title}}</span>
                             <span>{{date createdAt}}</span>
-                            <span>Attr:UserId:{{user_id}}</span>
-                            <span>Attr:PostId:{{id}}</span>
+                            <span>Attr:userId:{{user_id}}</span>
+                            <span>Attr:postId:{{id}}</span>
                         </li>
                     {{/each}}
                 </ul>
@@ -90,6 +90,26 @@
         <section id="post-view" class="d-none" data-view data-info="PUT /post/:postId">
             <article></article>
             <template>
+                <ul>
+                        <li>
+                            <span>{{title}}</span>
+                            <span>{{username}}</span>
+                            <span>{{date createdAt}}</span>
+                            <span>{{content}}</span>
+                            <span>Attr:userId:{{userId}}</span>
+                            <span>Attr:postId:{{id}}</span>
+                            <ul>
+                                {{#each comments}}
+                                <li>
+                                    <span>{{content}}</span>
+                                    <span>{{username}}</span>
+                                    <span>{{date createdAt}}</span>
+                                    <span>Attr:userId:{{userId}}</span>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </li>
+                </ul>
             </template>
         </section>
         <section id="post-edit" class="d-none" data-view data-info="PUT /post/:postId">
