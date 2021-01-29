@@ -35,8 +35,8 @@
 </head>
 
 <body>
-    <main class="container" data-main>
-        <header>
+    <header class="site-header">
+        <nav>
             <ul>
                 <li>
                     <a href="javascript:void(0);" onclick="hasher.setHash('homepage/')">Home</a>
@@ -50,12 +50,14 @@
                 <li>
                     <a href="javascript:void(0);" onclick="hasher.setHash('logout/')">Logout</a>
                 </li>
-
-                <h1 class="page-title"></h1>
-                <!-- The Tech Blog | Your Dashboard | -->
             </ul>
+        </nav>
 
-        </header>
+        <h1 class="page-title"></h1>
+        <!-- The Tech Blog | Your Dashboard | -->
+
+    </header>
+    <main class="container-fluid" data-main>
         <section id="homepage" class="d-none" data-view data-info="/homepage">
             <article></article>
             <template>
@@ -137,40 +139,54 @@
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <form class="login-form">
-                    <div>
-                      <label for="username-login">Username:</label>
-                      <input type="text" id="username-login" />
+                <div class="form-wrapper">
+                    <header class="form-header">
+                        Login
+                    </header>
+                    <div class="form-body">
+                        <form class="login-form">
+                            <div>
+                              <label for="username-login">Username:</label>
+                              <input type="text" id="username-login" />
+                            </div>
+                            <div>
+                              <label for="password-login">Password:</label>
+                              <input type="password" id="password-login" />
+                            </div>
+                            <div>
+                              <button type="submit">Login</button>
+                              <a href="javascript:void(0);" onclick="hasher.setHash('signup/')">Sign up instead</a>
+                            </div>
+                          </form>
                     </div>
-                    <div>
-                      <label for="password-login">Password:</label>
-                      <input type="password" id="password-login" />
-                    </div>
-                    <div>
-                      <button type="submit">Login</button>
-                      <a href="javascript:void(0);" onclick="hasher.setHash('signup/')">Sign up instead</a>
-                    </div>
-                  </form>
+                </div>
             </template>
         </section>
         <section id="signup" class="d-none" data-view data-info="/signup">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <form class="signup-form">
-                  <div>
-                    <label for="username-signup">Username:</label>
-                    <input type="text" id="username-signup" />
-                  </div>
-                  <div>
-                    <label for="password-signup">Password:</label>
-                    <input type="password" id="password-signup" />
-                  </div>
-                  <div>
-                    <button type="submit">Sign Up!</button>
-                    <a href="javascript:void(0);" onclick="hasher.setHash('login/')">Login instead</a>
-                  </div>
-                </form>
+                <div class="form-wrapper">
+                    <header class="form-header">
+                        Sign up
+                    </header>
+                    <div class="form-body">
+                        <form class="signup-form">
+                            <div>
+                            <label for="username-signup">Username:</label>
+                            <input type="text" id="username-signup" />
+                            </div>
+                            <div>
+                            <label for="password-signup">Password:</label>
+                            <input type="password" id="password-signup" />
+                            </div>
+                            <div>
+                            <button type="submit">Sign Up!</button>
+                            <a href="javascript:void(0);" onclick="hasher.setHash('login/')">Login instead</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </template>
         </section>
     </main>
