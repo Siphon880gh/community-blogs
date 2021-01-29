@@ -1,13 +1,23 @@
-// Initiate Express, Sequelize, etc
+// Initiate Express, Sequelize, Moment JS, etc
 const express = require("express");
 const app = express();
 const path = require("path");
 const sequelizeConnection = require("./config/connection.js");
 require("dotenv").config();
+const moment = require("moment");
 
 // Initiate Express-Handlebars
 const exhbs = require("express-handlebars");
-const hbs = exhbs.create();
+const hbs = exhbs.create({
+    // Specify helpers for all of Handlebars.
+    // Takes date-time from database and converts to human-readable date
+    helpers: {
+        date: function(sqlDate) {
+            const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+            return humanDate;
+        }
+    }
+});
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
@@ -32,11 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Expose CSS and js files
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join("./")));
-app.use(express.static(path.join("./public/assets")));
-app.use(express.static(path.join("./public/assets/css")));
-app.use(express.static(path.join("./public/assets/js")));
+app.use(express.static(path.join(__dirname)));
 
 // Get routes
 app.use(require('./controllers/'));
@@ -47,7 +53,7 @@ app.use((req, res, next) => {
 });
 
 // Listen for requests
-sequelizeConnection.sync({ force: true }).then(() => {
+sequelizeConnection.sync({ force: false }).then(() => {
     let port = process.env.PORT || 3001;
     app.listen(port, () => {
         console.log(`Server listening at ${port}`);
