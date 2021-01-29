@@ -82,6 +82,8 @@
                             <span>{{date createdAt}}</span>
                             <span>Attr:userId:{{user_id}}</span>
                             <span>Attr:postId:{{id}}</span>
+                            <span><a href="javascript:void(0);" onclick="hasher.setHash('posts/1/edit');">Update Post</a></span>
+                            <span><a href="javascript:void(0);" onclick="hasher.setHash('DELETE/api/posts/1');">Delete</a></span>
                         </li>
                     {{/each}}
                 </ul>
@@ -115,6 +117,14 @@
         <section id="post-edit" class="d-none" data-view data-info="PUT /post/:postId">
             <article></article>
             <template>
+                <ul>
+                        <li>
+                            <span>{{title}}</span>
+                            <span>{{content}}</span>
+                            <span>Attr:userId:{{userId}}</span>
+                            <span>Attr:postId:{{id}}</span>
+                        </li>
+                </ul>
             </template>
         </section>
         <section id="login" class="d-none" data-view data-info="/login">
