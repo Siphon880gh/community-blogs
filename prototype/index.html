@@ -161,7 +161,7 @@
                                             <textarea id="add-comment-input" class="editing"></textarea>
                                         </div>
 
-                                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
+                                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
                                     </div>
                                 </div>
                         </div> <!-- comments-wrapper -->
@@ -198,7 +198,7 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="login" class="d-none" data-view data-route="/login">
+        <section id="login" class="d-none" data-view data-route="/login, POST">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->

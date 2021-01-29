@@ -1,3 +1,4 @@
+// Initiate Express, Sequelize, etc
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -9,17 +10,31 @@ const hbs = exhbs.create();
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
+// Initiate Session
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const sess = {
+    secret: 'Super secret secret',
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelizeConnection
+    })
+};
+
+app.use(session(sess));
+
+// Get routes
+app.use(require('./controllers/'));
+
 // Request ready
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // CSS and js files
 app.use(express.static("./public"));
-
-app.get("/", (req, res) => {
-    let data1 = req.body;
-    res.json({ text: "Test successful" });
-});
 
 // Setup 404 page
 app.use((req, res, next) => {
