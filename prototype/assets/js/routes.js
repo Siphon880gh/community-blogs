@@ -56,6 +56,7 @@ crossroads.addRoute('logout')
 
 crossroads.addRoute('posts/{postId}')
     .matched.add((postId) => {
+        console.log('Route', 'posts/{postId}');
         // When refactored: postId will be in Post.findAll.. WHERE
         // As prototype: We will just grab postId=1 regardless
         $.get("mocks/post-view/post.json", (data) => {
@@ -75,6 +76,39 @@ crossroads.addRoute('posts/{postId}')
         }); // ajax
     }); // matched
 
+crossroads.addRoute('posts/{postId}/edit')
+    .matched.add((postId) => {
+        console.log('Route', 'posts/{postId}/edit');
+        // When refactored: postId will be in Post.findAll.. WHERE
+        // As prototype: We will just grab postId=1 regardless
+        $.get("mocks/post-edit/post.json", (data) => {
+            const postStraightThrough = data;
+            const helpersArr = [{
+                name: "date",
+                fxn: function(options) {
+                    const sqlDate = options;
+                    const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+                    return humanDate;
+                }
+            }];
+            // debugger;
+
+            // Render with data context and helpers
+            res.render("#post-edit", postStraightThrough, helpersArr);
+        }); // ajax
+    }); // matched
+
+crossroads.addRoute('DELETE/api/posts/{postId}')
+    .matched.add((postId) => {
+        console.log("DELETE/api/posts/{postId}");
+        alert("Prototype: Would delete post by post id");
+    }); // matched
+
+crossroads.bypassed.add(function(request) {
+    console.log("Route not found. Debug info follows");
+    console.log(request);
+    debugger;
+});
 
 // parseHash is an handler for on history state onready and onchange
 function parseHash(newHash, oldHash) {
