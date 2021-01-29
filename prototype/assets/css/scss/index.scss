@@ -49,6 +49,9 @@ body {
     padding-right: 15px;
 }
 
+
+/** Header **/
+
 .site-header {
     padding: 0;
     padding-left: 15px;
@@ -71,9 +74,15 @@ body {
                 margin-right: 60px;
                 text-align: center;
                 list-style-type: none;
-                a {
+                a,
+                a:visited {
                     color: var(--lime);
                     text-decoration: none;
+                    transition: color 500ms;
+                }
+                a:active,
+                a:hover {
+                    color: var(--lightgray);
                 }
             }
         }
@@ -89,6 +98,9 @@ body {
         box-shadow: 5px 5px var(--lightgray);
     }
 }
+
+
+/** Login/Signup Form **/
 
 .form-wrapper {
     margin-top: 20px;
@@ -116,6 +128,7 @@ body {
         border-radius: 5px;
         background-color: var(--darkgray);
         color: white;
+        transition: background-color 500ms;
     }
     button:hover {
         background-color: var(--lightgray);
@@ -154,6 +167,25 @@ body {
             input {
                 width: 100%;
             }
+        }
+    }
+    .dashboard-btn-wrapper {
+        position: fixed;
+        left: 0;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        button {
+            padding: 5px 20px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 300;
+            background-color: var(--brown);
+            transition: color 500ms;
+        }
+        button:hover {
+            color: var(--lightgray);
         }
     }
 }
