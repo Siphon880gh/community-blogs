@@ -28,12 +28,14 @@ a {
 @media (min-width: 992px) {
     main {
         width: 70% !important;
+        margin-top: 20px;
     }
 }
 
 @media (min-width: 1200px) {
     main {
-        width: 40% !important;
+        width: 60% !important;
+        margin-top: 40px;
     }
 }
 
@@ -191,12 +193,13 @@ body {
 }
 
 
-/* Homepage */
+/* Homepage / View Post */
 
 .posts-wrapper {
     .post-wrapper {
         margin-top: 20px;
-        .post-header {
+        .post-header,
+        .comment-header {
             padding: 5px 10px;
             color: var(--lime);
             background-color: var(--brown);
@@ -217,12 +220,23 @@ body {
                 font-weight: 200;
             }
         }
-        .post-body {
+        .post-body,
+        .comment-body {
             border: 2px solid var(--brown);
             padding: 5px 10px 5px 10px;
             input {
                 width: 100%;
             }
+        }
+        .comment__body__footer {
+            padding: 30px;
+            border: 2px solid var(--brown);
+        }
+        .comment-wrapper {
+            margin-top: 15px;
+        }
+        .comment-footer {
+            margin-top: 1rem;
         }
     }
 }

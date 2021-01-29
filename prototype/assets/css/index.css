@@ -21,11 +21,13 @@ a {
 @media (min-width: 992px) {
   main {
     width: 70% !important;
+    margin-top: 20px;
   }
 }
 @media (min-width: 1200px) {
   main {
-    width: 40% !important;
+    width: 60% !important;
+    margin-top: 40px;
   }
 }
 /* Layout */
@@ -171,11 +173,12 @@ body {
   color: var(--lightgray);
 }
 
-/* Homepage */
+/* Homepage / View Post */
 .posts-wrapper .post-wrapper {
   margin-top: 20px;
 }
-.posts-wrapper .post-wrapper .post-header {
+.posts-wrapper .post-wrapper .post-header,
+.posts-wrapper .post-wrapper .comment-header {
   padding: 5px 10px;
   color: var(--lime);
   background-color: var(--brown);
@@ -183,23 +186,40 @@ body {
   font-weight: 600;
 }
 .posts-wrapper .post-wrapper .post-header a,
-.posts-wrapper .post-wrapper .post-header a:visited {
+.posts-wrapper .post-wrapper .post-header a:visited,
+.posts-wrapper .post-wrapper .comment-header a,
+.posts-wrapper .post-wrapper .comment-header a:visited {
   color: var(--lime);
 }
 .posts-wrapper .post-wrapper .post-header a:active,
-.posts-wrapper .post-wrapper .post-header a:hover {
+.posts-wrapper .post-wrapper .post-header a:hover,
+.posts-wrapper .post-wrapper .comment-header a:active,
+.posts-wrapper .post-wrapper .comment-header a:hover {
   color: var(--darkgray);
 }
-.posts-wrapper .post-wrapper .post-header aside {
+.posts-wrapper .post-wrapper .post-header aside,
+.posts-wrapper .post-wrapper .comment-header aside {
   transform: translateY(50%);
   float: right;
   font-size: .75rem;
   font-weight: 200;
 }
-.posts-wrapper .post-wrapper .post-body {
+.posts-wrapper .post-wrapper .post-body,
+.posts-wrapper .post-wrapper .comment-body {
   border: 2px solid var(--brown);
   padding: 5px 10px 5px 10px;
 }
-.posts-wrapper .post-wrapper .post-body input {
+.posts-wrapper .post-wrapper .post-body input,
+.posts-wrapper .post-wrapper .comment-body input {
   width: 100%;
+}
+.posts-wrapper .post-wrapper .comment__body__footer {
+  padding: 30px;
+  border: 2px solid var(--brown);
+}
+.posts-wrapper .post-wrapper .comment-wrapper {
+  margin-top: 15px;
+}
+.posts-wrapper .post-wrapper .comment-footer {
+  margin-top: 1rem;
 }
