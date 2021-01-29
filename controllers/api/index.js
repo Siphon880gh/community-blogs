@@ -116,9 +116,6 @@ router.post('/login', async(req, res) => {
     } else {
         res.json({ loggedIn: 0 });
     }
-    // } catch (err) {
-    //     res.json({ err })
-    // }
 
 });
 
@@ -130,8 +127,15 @@ router.post('/signup', (req, res) => {
 
 router.get('/logout', (req, res) => {
     // User logging out
-    // TODO: User logging out
-    res.json({ todo: "Coming soon" });
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            // res.status(204).json({ loggedIn: 0 });
+            res.status(204).redirect("../login");
+        });
+    } else {
+        // res.status(404).json({ loggedIn: 0 });
+        res.status(404).redirect("../login");
+    }
 });
 
 module.exports = router;

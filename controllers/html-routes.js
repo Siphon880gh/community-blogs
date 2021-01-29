@@ -117,4 +117,8 @@ router.get('/signup', (req, res) => {
     res.render("signup", postStraightThrough);
 });
 
+router.get('/logout', (req, res) => {
+    res.redirect("/api/logout");
+});
+
 module.exports = router;
