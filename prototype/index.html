@@ -73,7 +73,7 @@
                         </header>
                         <div class="post-body">
                             {{content}}
-                        </div> <!-- form-body -->
+                        </div> <!-- post-body -->
                     </div> <!-- post-wrapper -->
                     {{/each}}
                 </div> <!-- posts-wrapper -->
@@ -83,18 +83,18 @@
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <ul>
+                <div class="dashboard-posts-wrapper">
                     {{#each posts}}
-                        <li>
-                            <span>{{title}}</span>
-                            <span>{{date createdAt}}</span>
-                            <span>Attr:userId:{{user_id}}</span>
-                            <span>Attr:postId:{{id}}</span>
-                            <span><a href="javascript:void(0);" onclick="hasher.setHash('posts/1/edit');">Update Post</a></span>
-                            <span><a href="javascript:void(0);" onclick="hasher.setHash('DELETE/api/posts/1');">Delete</a></span>
-                        </li>
+                    <div class="dashboard-post-wrapper" data-postid="{{id}}" data-userid="{{user_id}}">
+                        <header class="post-header">
+                            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.dashboard-post-wrapper').dataset.postid);">{{title}}</a>
+                            <aside>
+                                {{date createdAt}}
+                            </aside>
+                        </header>
+                    </div> <!-- dashboard-post-wrapper -->
                     {{/each}}
-                </ul>
+                </div> <!-- dashboard-posts-wrapper -->
             </template>
         </section>
         <section id="post-view" class="d-none" data-view data-info="PUT /post/:postId">
