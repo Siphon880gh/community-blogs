@@ -105,7 +105,10 @@ router.get('/login', (req, res) => {
         return;
     }
 
-    res.render('login');
+    let postStraightThrough = {};
+    postStraightThrough.pageTitle = "The Tech Blog";
+
+    res.render("login", postStraightThrough);
 });
 
 module.exports = router;
