@@ -13,7 +13,8 @@ crossroads.addRoute('homepage')
     .matched.add(() => {
         $.get("mocks/homepage/posts.json", (data) => {
             const postsWrapper = {
-                posts: data
+                posts: data,
+                pageTitle: "The Tech Blog"
             };
             const helpersArr = [{
                 name: "date",
@@ -33,7 +34,8 @@ crossroads.addRoute('dashboard')
     .matched.add(() => {
         $.get("mocks/dashboard/posts.json", (data) => {
             const postsWrapper = {
-                posts: data
+                posts: data,
+                pageTitle: "Dash Board"
             };
             const helpersArr = [{
                 name: "date",
@@ -51,12 +53,18 @@ crossroads.addRoute('dashboard')
 
 crossroads.addRoute('login')
     .matched.add(() => {
-        res.render("#login");
+        var genericData = {
+            pageTitle: "The Tech Blog"
+        }
+        res.render("#login", genericData);
     });
 
 crossroads.addRoute('signup')
     .matched.add(() => {
-        res.render("#signup");
+        var genericData = {
+            pageTitle: "The Tech Blog"
+        }
+        res.render("#signup", genericData);
     });
 
 crossroads.addRoute('logout')
@@ -66,11 +74,11 @@ crossroads.addRoute('logout')
 
 crossroads.addRoute('posts/{postId}')
     .matched.add((postId) => {
-        console.log('Route', 'posts/{postId}');
         // When refactored: postId will be in Post.findAll.. WHERE
         // As prototype: We will just grab postId=1 regardless
         $.get("mocks/post-view/post.json", (data) => {
-            const postStraightThrough = data;
+            let postStraightThrough = data;
+            postStraightThrough.pageTitle = "The Tech Blog";
             const helpersArr = [{
                 name: "date",
                 fxn: function(options) {
@@ -93,6 +101,7 @@ crossroads.addRoute('posts/{postId}/edit')
         // As prototype: We will just grab postId=1 regardless
         $.get("mocks/post-edit/post.json", (data) => {
             const postStraightThrough = data;
+            postStraightThrough.pageTitle = "The Tech Blog";
             const helpersArr = [{
                 name: "date",
                 fxn: function(options) {
@@ -124,6 +133,14 @@ crossroads.bypassed.add(function(request) {
 function parseHash(newHash, oldHash) {
     // crossroads parse triggers crossroads matched.add
     crossroads.parse(newHash);
+
+    // Update the page title
+    setTimeout(() => {
+
+        const $visibleView = $("[data-view]:not(.d-none");
+        const newPageTitle = $visibleView.find(".page-title-dynamic").text();
+        $(".page-title").text(newPageTitle);
+    }, 200);
 }
 
 // setup listener for history state onready and onchange
