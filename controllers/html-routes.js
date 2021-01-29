@@ -4,7 +4,12 @@ const { Post, User, Comment } = require('../models');
 
 router.get('/', (req, res) => {
     // Whether or not logged in, you can view posts on this public blog
-    res.redirect('/homepage');
+    // res.redirect('/homepage');
+    const postsWrapper = {
+        posts: [], // TODO: GET /api/posts
+        pageTitle: "The Tech Blog"
+    };
+    res.render('homepage', postsWrapper);
 });
 
 router.get('/homepage', (req, res) => {

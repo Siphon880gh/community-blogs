@@ -27,15 +27,19 @@ const sess = {
 
 app.use(session(sess));
 
-// Get routes
-app.use(require('./controllers/'));
-
 // Request ready
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// CSS and js files
-app.use(express.static("./public"));
+// Expose CSS and js files
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join("./")));
+app.use(express.static(path.join("./public/assets")));
+app.use(express.static(path.join("./public/assets/css")));
+app.use(express.static(path.join("./public/assets/js")));
+
+// Get routes
+app.use(require('./controllers/'));
 
 // Setup 404 page
 app.use((req, res, next) => {
