@@ -121,3 +121,37 @@ body {
         background-color: var(--lightgray);
     }
 }
+
+.posts-wrapper {
+    .post-wrapper {
+        margin-top: 20px;
+        .post-header {
+            padding: 5px 10px;
+            color: var(--lime);
+            background-color: var(--brown);
+            font-size: 1.25rem;
+            font-weight: 600;
+            a,
+            a:visited {
+                color: var(--lime);
+            }
+            a:active,
+            a:hover {
+                color: var(--darkgray);
+            }
+            aside {
+                transform: translateY(50%);
+                float: right;
+                font-size: .75rem;
+                font-weight: 200;
+            }
+        }
+        .post-body {
+            border: 2px solid var(--brown);
+            padding: 5px 10px 5px 10px;
+            input {
+                width: 100%;
+            }
+        }
+    }
+}
