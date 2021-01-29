@@ -115,7 +115,7 @@
                         <div class="post-body">
                             {{content}}
                         </div> <!-- post-body -->
-                        <div class="comments-wrapper" data-userid="{{userId}}">
+                        <div class="comments-wrapper" data-userid="{{userId}}" data-commentid="{{commentId}}">
                                 {{#each comments}}
                                     <div class="comment-wrapper">
                                         <div class="comment-header">&nbsp;</div>
@@ -127,10 +127,18 @@
                                         </div>
                                     </div>
                                 {{/each}}
-                                </li>
-                            </ul>
-                        </div>
+                                <div class="comment-add-wrapper">
+                                    <div class="comment-header">&nbsp;</div>
+                                    <div class="comment-add-body">
+                                        <div class="input-group">
+                                            <label for="add-comment">Comment:</label>
+                                            <textarea id="add-comment" class="editing"></textarea>
+                                        </div>
 
+                                        <button class="update-post standout" onclick="alert('Prototype: Would add comment to post with POST /comments with postId and userId')">Submit</button>
+                                    </div>
+                                </div>
+                        </div> <!-- comments-wrapper -->
                     </div> <!-- post-wrapper -->
                 </div> <!-- posts-wrapper -->
             </template>
@@ -160,12 +168,12 @@
                         </header>
                         <div class="post-body">
                             <div class="input-group">
-                                <label for="username-login">Title:</label>
-                              <input type="text" class="editing" value="{{title}}"></input>
+                                <label for="edit-title">Title:</label>
+                                <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
                             </div>
                             <div class="input-group">
-                                <label for="username-login">Content:</label>
-                                <textarea class="editing">{{content}}</textarea>
+                                <label for="edit-content">Content:</label>
+                                <textarea id="edit-content" class="editing">{{content}}</textarea>
                             </div>
                             <div class="preview-buttons">
                                 <button class="update-post standout" onclick="alert('Prototype: Would update post at PUT /posts/:postId')">Update Post</button>

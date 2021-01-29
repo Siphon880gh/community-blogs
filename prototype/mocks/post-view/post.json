@@ -6,7 +6,7 @@
     "createdAt": "2021-01-29T00:11:17.000Z",
     "updatedAt": "2021-01-29T00:11:17.000Z",
     "comments": [{
-        "id": 1,
+        "commentId": 1,
         "content": "comment 1",
         "userId": 2,
         "createdAt": "2021-01-29T00:11:17.000Z",
