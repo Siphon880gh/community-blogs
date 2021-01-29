@@ -9,15 +9,11 @@
 
 /* Color Themes */
 
-.container {
+:root {
     --brown: #231010;
     --darkgray: #666666;
     --lightgray: #a7a7a7;
     --lime: #d9ead3;
-}
-
-body {
-    background-color: var(--lime);
 }
 
 
@@ -28,3 +24,71 @@ body {
 @media (min-width: 768px) {}
 
 @media (min-width: 1200px) {}
+
+
+/* Layout */
+
+body {
+    background-color: var(--lime);
+}
+
+.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.site-header {
+    padding: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: var(--brown);
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+        ul {
+            width: 100%;
+            padding: 0;
+            margin: 10px 0;
+            li:first-child {
+                color: red;
+            }
+            li {
+                display: inline-block;
+                margin-right: 60px;
+                text-align: center;
+                list-style-type: none;
+                a {
+                    color: var(--lime);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    .page-title {
+        display: inline-block;
+        padding: 5px;
+        margin: 10px 0 20px 0;
+        border-radius: 10px;
+        color: var(--brown);
+        background-color: var(--lime);
+    }
+}
+
+.form-wrapper {
+    margin-top: 20px;
+    .form-header {
+        padding: 5px 10px;
+        font-weight: 400;
+        color: var(--lime);
+        background-color: var(--brown);
+    }
+    .form-body {
+        border: 2px solid var(--brown);
+        padding: 5px 10px;
+        input {
+            width: 100%;
+        }
+    }
+}
