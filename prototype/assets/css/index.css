@@ -110,3 +110,35 @@ body {
 .form-wrapper button:hover {
   background-color: var(--lightgray);
 }
+
+.posts-wrapper .post-wrapper {
+  margin-top: 20px;
+}
+.posts-wrapper .post-wrapper .post-header {
+  padding: 5px 10px;
+  color: var(--lime);
+  background-color: var(--brown);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.posts-wrapper .post-wrapper .post-header a,
+.posts-wrapper .post-wrapper .post-header a:visited {
+  color: var(--lime);
+}
+.posts-wrapper .post-wrapper .post-header a:active,
+.posts-wrapper .post-wrapper .post-header a:hover {
+  color: var(--darkgray);
+}
+.posts-wrapper .post-wrapper .post-header aside {
+  transform: translateY(50%);
+  float: right;
+  font-size: .75rem;
+  font-weight: 200;
+}
+.posts-wrapper .post-wrapper .post-body {
+  border: 2px solid var(--brown);
+  padding: 5px 10px 5px 10px;
+}
+.posts-wrapper .post-wrapper .post-body input {
+  width: 100%;
+}

@@ -62,19 +62,21 @@
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <ul>
+                <div class="posts-wrapper">
                     {{#each posts}}
-                        <li>
-                            <span>{{title}}</span>
-                            <span><a href="javascript:void(0);" onclick="hasher.setHash('posts/1');">View / Add Comments</a></span>
-                            <span>{{username}}</span>
-                            <span>{{date createdAt}}</span>
-                            <span>{{content}}</span>
-                            <span>Attr:userId:{{user_id}}</span>
-                            <span>Attr:postId:{{id}}</span>
-                        </li>
+                    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{user_id}}">
+                        <header class="post-header">
+                            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.post-wrapper').dataset.postid);">{{title}}</a>
+                            <aside>
+                                Posted by {{username}} on {{date createdAt}}
+                            </aside>
+                        </header>
+                        <div class="post-body">
+                            {{content}}
+                        </div> <!-- form-body -->
+                    </div> <!-- post-wrapper -->
                     {{/each}}
-                </ul>
+                </div> <!-- posts-wrapper -->
             </template>
         </section>
         <section id="dashboard" class="d-none" data-view data-info="/dashboard">
@@ -158,8 +160,8 @@
                               <a href="javascript:void(0);" onclick="hasher.setHash('signup/')">Sign up instead</a>
                             </div>
                           </form>
-                    </div>
-                </div>
+                    </div> <!-- form-body -->
+                </div> <!-- form-wrapper -->
             </template>
         </section>
         <section id="signup" class="d-none" data-view data-info="/signup">
@@ -185,8 +187,8 @@
                             <a href="javascript:void(0);" onclick="hasher.setHash('login/')">Login instead</a>
                             </div>
                         </form>
-                    </div>
-                </div>
+                    </div> <!-- form-body -->
+                </div> <!-- form-wrapper -->
             </template>
         </section>
     </main>
