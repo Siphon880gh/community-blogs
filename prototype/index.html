@@ -94,6 +94,9 @@
                         </header>
                     </div> <!-- dashboard-post-wrapper -->
                     {{/each}}
+                    <footer class="dashboard-btn-wrapper">
+                        <button onclick="hasher.setHash('posts/' + this.closest('.dashboard-post-wrapper' + '/edit').dataset.postid);">+ New Post</button>  
+                    </footer>
                 </div> <!-- dashboard-posts-wrapper -->
             </template>
         </section>
