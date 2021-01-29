@@ -1,6 +1,5 @@
 <!--
-    WARNING: Not meant for production. This is a prototype to help the developer divide html into templates, to come up with routes for the app's features, and to figure out the JS logic and CSS.
-    WARNING: Not meant for production. Mock data is used. Handlebars front version is used. Routing is used with Crossroads JS. Compass is used. jQuery is used. This is for prototyping.
+    WARNING: Not meant for production. This is a prototype to help the developer divide html into templates, to come up with routes for the app's features, and to figure out the JS logic and CSS. Mock data is being used. The Handlebars in this prototype is similar to Express-Handlebars but is a frontend version.
     WARNING: Production code is in /public.
 -->
 <!DOCTYPE html>
@@ -58,7 +57,7 @@
 
     </header>
     <main class="container" data-main>
-        <section id="homepage" class="d-none" data-view data-info="/homepage">
+        <section id="homepage" class="d-none" data-view data-route="/homepage">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -79,7 +78,7 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="dashboard" class="d-none" data-view data-info="/dashboard">
+        <section id="dashboard" class="d-none" data-view data-route="/dashboard">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -95,12 +94,39 @@
                     </div> <!-- dashboard-post-wrapper -->
                     {{/each}}
                     <footer class="dashboard-btn-wrapper">
-                        <button onclick="hasher.setHash('posts/new');">+ New Post</button>  
+                        <button onclick="hasher.setHash('posts/new');" data-route="/posts/new">+ New Post</button>  
                     </footer>
                 </div> <!-- dashboard-posts-wrapper -->
             </template>
         </section>
-        <section id="post-view" class="d-none" data-view data-info="PUT /post/:postId">
+        <section id="post-new" class="d-none" data-view data-route="/posts/new">
+            <article></article>
+            <template>
+                <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
+                <div class="posts-wrapper">
+                    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
+                        <header class="post-header">
+                            Create New Post
+                        </header>
+                        <div class="post-body">
+                            <div class="input-group">
+                                <label for="edit-title">Title:</label>
+                                <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
+                            </div>
+                            <div class="input-group">
+                                <label for="edit-content">Content:</label>
+                                <textarea id="edit-content" class="editing">{{content}}</textarea>
+                            </div>
+                            <div class="preview-buttons">
+                                <button class="create-post standout" onclick="alert('Prototype: Would create post.')" data-route="/api/posts, POST: title, content, userId">Create</button>
+                            </div>
+                        </div> <!-- post-body -->
+
+                    </div> <!-- post-wrapper -->
+                </div> <!-- posts-wrapper -->
+            </template>
+        </section>
+        <section id="post-view" class="d-none" data-view data-route="/posts/:postId">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -132,10 +158,10 @@
                                     <div class="comment-add-body">
                                         <div class="input-group">
                                             <label for="add-comment">Comment:</label>
-                                            <textarea id="add-comment" class="editing"></textarea>
+                                            <textarea id="add-comment-input" class="editing"></textarea>
                                         </div>
 
-                                        <button class="update-post standout" onclick="alert('Prototype: Would add comment to post with POST /comments with postId and userId')">Submit</button>
+                                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
                                     </div>
                                 </div>
                         </div> <!-- comments-wrapper -->
@@ -143,34 +169,8 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="post-new" class="d-none" data-view data-info="POST /posts">
-            <article></article>
-            <template>
-                <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
-                <div class="posts-wrapper">
-                    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
-                        <header class="post-header">
-                            Create New Post
-                        </header>
-                        <div class="post-body">
-                            <div class="input-group">
-                                <label for="edit-title">Title:</label>
-                                <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
-                            </div>
-                            <div class="input-group">
-                                <label for="edit-content">Content:</label>
-                                <textarea id="edit-content" class="editing">{{content}}</textarea>
-                            </div>
-                            <div class="preview-buttons">
-                                <button class="update-post standout" onclick="alert('Prototype: Would create post at POST /posts')">Create</button>
-                            </div>
-                        </div> <!-- post-body -->
 
-                    </div> <!-- post-wrapper -->
-                </div> <!-- posts-wrapper -->
-            </template>
-        </section>
-        <section id="post-preview" class="d-none" data-view data-info="/post/:postId/preview -> PUT /post/:postId, DELETE /post/:postId">
+        <section id="post-preview" class="d-none" data-view data-route="/posts/:postId/preview">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -189,8 +189,8 @@
                                 <textarea id="edit-content" class="editing">{{content}}</textarea>
                             </div>
                             <div class="preview-buttons">
-                                <button class="update-post standout" onclick="alert('Prototype: Would update post at PUT /posts/:postId')">Update Post</button>
-                                <button class="delete-post standout" onclick="alert('Prototype: Would delete post at DELETE /posts/:postId')">Delete</button>
+                                <button class="update-post standout" onclick="alert('Prototype: Would update post')" data-route="/posts/:postId, PUT: title, content, postId">Update Post</button>
+                                <button class="delete-post standout" onclick="alert('Prototype: Would delete post')" data-route="/posts/:postId, DELETE">Delete</button>
                             </div>
                         </div> <!-- post-body -->
 
@@ -198,7 +198,7 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="login" class="d-none" data-view data-info="/login">
+        <section id="login" class="d-none" data-view data-route="/login">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -217,15 +217,15 @@
                               <input type="password" id="password-login" />
                             </div>
                             <div>
-                              <button class="standout" type="submit">Login</button>
-                              <a href="javascript:void(0);" onclick="hasher.setHash('signup/')">Sign up instead</a>
+                              <button class="standout" type="submit" onclick="alert('Prototype: Would login');" data-route="/login">Login</button>
+                              <a href="javascript:void(0);" onclick="hasher.setHash('signup/')" data-route="/signup">Sign up instead</a>
                             </div>
                           </form>
                     </div> <!-- form-body -->
                 </div> <!-- form-wrapper -->
             </template>
         </section>
-        <section id="signup" class="d-none" data-view data-info="/signup">
+        <section id="signup" class="d-none" data-view data-route="/signup">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -244,8 +244,8 @@
                             <input type="password" id="password-signup" />
                             </div>
                             <div>
-                            <button class="standout" type="submit">Sign Up!</button>
-                            <a href="javascript:void(0);" onclick="hasher.setHash('login/')">Login instead</a>
+                            <button class="standout" type="submit" onclick="alert('Prototype: Would signup');" data-route="/signup">Sign Up!</button>
+                            <a href="javascript:void(0);" onclick="hasher.setHash('login/')" data-route="/login">Login instead</a>
                             </div>
                         </form>
                     </div> <!-- form-body -->
