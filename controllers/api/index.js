@@ -75,13 +75,13 @@ router.delete('/posts/:postId', (req, res) => {
 router.post('/login', (req, res) => {
     // User logging in
     // TODO: User logging in
-    res.json({ todo: "Coming soon" });
+    res.render("login");
 });
 
 router.post('/signup', (req, res) => {
     // Signing up
     // TODO: Signing up
-    res.json({ todo: "Coming soon" });
+    res.render("signup");
 });
 
 router.get('/logout', (req, res) => {
