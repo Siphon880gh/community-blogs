@@ -118,10 +118,14 @@ All comments listed as well.`);
             },
             {
                 model: Comment,
-                attributes: ["id", "content", ["user_id", "userId"], "createdAt", "updatedAt"],
+                attributes: [
+                    ["id", "commentId"], "content", ["user_id", "userId"], "createdAt", "updatedAt"
+                ],
                 include: {
                     model: User,
-                    attributes: ["id", "username"]
+                    attributes: [
+                        ["id", "commentId"], "username"
+                    ]
                 }
             }
         ]
@@ -146,7 +150,7 @@ All comments listed as well.`);
 
     // console.log(global.onePost);
     // console.log(global.onePost.comments[0].username);
-    // console.log(JSON.stringify(global.onePost));
+    console.log(JSON.stringify(global.onePost));
 
 }); // afterAll
 
