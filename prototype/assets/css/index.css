@@ -224,7 +224,13 @@ button.standout:hover {
   padding: 30px;
   border: 2px solid var(--brown);
 }
-.posts-wrapper .post-wrapper .comment-wrapper {
+.posts-wrapper .post-wrapper .comment-add-body {
+  padding: 10px;
+  border: 2px solid var(--brown);
+}
+.posts-wrapper .post-wrapper .comment-wrapper,
+.posts-wrapper .post-wrapper .comment-add-wrapper {
+  padding: 5px !important;
   margin-top: 15px;
 }
 .posts-wrapper .post-wrapper .comment-footer {
