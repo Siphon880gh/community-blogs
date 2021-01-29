@@ -1,6 +1,6 @@
 // setup renderer
 window.res = {
-    render: (querySelector, data, helpersArr) => {
+    render: (querySelector, data, helpersArr, partialsArr) => {
         // Hide all other views
         $("[data-view]").addClass("d-none");
 
