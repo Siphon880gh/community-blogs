@@ -10,7 +10,7 @@ crossroads.addRoute('/')
     }); // matched
 
 crossroads.addRoute('homepage')
-    .matched.add((postId) => {
+    .matched.add(() => {
         $.get("mocks/homepage/posts.json", (data) => {
             const postsWrapper = {
                 posts: data
@@ -30,7 +30,7 @@ crossroads.addRoute('homepage')
     }); // matched
 
 crossroads.addRoute('dashboard')
-    .matched.add((postId) => {
+    .matched.add(() => {
         $.get("mocks/dashboard/posts.json", (data) => {
             const postsWrapper = {
                 posts: data
@@ -49,8 +49,18 @@ crossroads.addRoute('dashboard')
         }); // ajax
     }); // matched
 
+crossroads.addRoute('login')
+    .matched.add(() => {
+        res.render("#login");
+    });
+
+crossroads.addRoute('signup')
+    .matched.add(() => {
+        res.render("#signup");
+    });
+
 crossroads.addRoute('logout')
-    .matched.add((postId) => {
+    .matched.add(() => {
         alert("Prototype: Would be logging out.");
     });
 
