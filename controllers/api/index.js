@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
+const { Post, User, Comment } = require('../../models');
 
 router.post('/comments', (req, res) => {
     // User must be logged in to post comment
@@ -72,16 +74,58 @@ router.delete('/posts/:postId', (req, res) => {
     res.json({ todo: "Coming soon" });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async(req, res) => {
     // User logging in
     // TODO: User logging in
-    res.render("login");
+
+    const { username, password } = req.body;
+
+    let row = await User.findOne({
+        where: {
+            username
+        }
+    }).then(async(row) => {
+        if (row) row = row.get({ plain: true });
+
+        const plainPassword = password;
+        const hash = row.password;
+        let passwordMatch = bcrypt.compareSync(plainPassword, hash);
+
+        if (passwordMatch) return row;
+        else return null;
+    }).catch(err => {
+        console.log({ err });
+    });
+
+    // console.log({ row });
+    // process.exit(0);
+
+    if (row) {
+        const dbUserData = row;
+
+        // Start session:
+        console.log({ dbUserData });
+
+        req.session.loggedIn = 1;
+        req.session.user = {
+            userId: dbUserData.id,
+            username: dbUserData.username
+        };
+
+        res.json({ loggedIn: 1 });
+    } else {
+        res.json({ loggedIn: 0 });
+    }
+    // } catch (err) {
+    //     res.json({ err })
+    // }
+
 });
 
 router.post('/signup', (req, res) => {
     // Signing up
     // TODO: Signing up
-    res.render("signup");
+    // res.render("signup");
 });
 
 router.get('/logout', (req, res) => {

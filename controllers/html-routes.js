@@ -54,7 +54,6 @@ router.get('/', async(req, res) => {
 
     res.render('homepage', postsWrapper);
     // Homepage of all public posts
-    homepage(req, res);
 });
 
 router.get('/dashboard', (req, res) => {
