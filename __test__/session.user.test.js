@@ -3,10 +3,6 @@ const sequelizeConnection = require("../config/connection.js");
 // Mock request session because we are not testing Express routes
 global.req = {};
 global.req.session = {};
-global.req.session.save = (callback) => {
-    callback();
-    return 1;
-}
 global.req.session.destroy = ((errCallback) => {
     errCallback();
 
@@ -45,18 +41,16 @@ beforeAll(async() => {
 
     app.use(session(sess));
 
-    global.req.session.save(() => {
-        let req = {}; // Remove line when refactored into production code
-        req.session = {}; // Remove line when refactored into production code
-        req.session.loggedIn = 1;
-        req.session.user = {
-            userId: 1,
-            username: "testUser"
-        }
+    let req = {}; // Remove line when refactored into production code
+    req.session = {}; // Remove line when refactored into production code
+    req.session.loggedIn = 1;
+    req.session.user = {
+        userId: 1,
+        username: "testUser"
+    }
 
-        global.req.session.loggedIn = req.session.loggedIn; // Remove line when refactored into production code
-        global.req.session.user = req.session.loggedIn; // Remove line when refactored into production code
-    });
+    global.req.session.loggedIn = req.session.loggedIn; // Remove line when refactored into production code
+    global.req.session.user = req.session.loggedIn; // Remove line when refactored into production code
 });
 
 describe('Testing session can authorize tasks', () => {
