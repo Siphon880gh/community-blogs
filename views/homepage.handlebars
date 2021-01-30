@@ -3,7 +3,7 @@
     {{#each posts}}
     <div class="post-wrapper" data-postid="{{id}}" data-userid="{{user_id}}">
         <header class="post-header">
-            <a href="javascript:void(0);" onclick="let postid = this.closest('.post-wrapper').dataset.postid; window.location.href=`posts/${postid};`">{{title}}</a>
+            <a href="javascript:void(0);" onclick="let postId = this.closest('.post-wrapper').dataset.postid; document.location.pathname=`/posts/${postId}`">{{title}}</a>
             <aside>
                 Posted by {{username}} on {{date createdAt}}
             </aside>
