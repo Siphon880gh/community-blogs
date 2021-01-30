@@ -23,7 +23,7 @@ router.post('/posts/:postId/comments', async(req, res) => {
             post_id: postId
         }).then(row => row.toJSON())
         .catch(err => {
-            res.status(403).json({ success: 0, error: "aa - General catch-all error: Please report to server administrator that POST api/posts/:postId/comments failed." });
+            res.status(403).json({ success: 0, error: "General catch-all error: Please report to server administrator that POST api/posts/:postId/comments failed." });
             return;
         });
     if (commentCreated) {
@@ -60,6 +60,7 @@ router.post('/posts', async(req, res) => {
         return row;
     }).catch(err => {
         res.status(500).json({ error: err });
+        return;
     });
     if (postCreated) {
         res.status(200).json({ success: postCreated }).redirect("/dashboard");
@@ -114,6 +115,7 @@ router.put('/posts/:postId', async(req, res) => {
         return row;
     }).catch(err => {
         reportError(err);
+        return;
     });
     if (isAllowedEdit) {
         // Then save the post edit
@@ -127,6 +129,7 @@ router.put('/posts/:postId', async(req, res) => {
             }
         }).catch(err => {
             reportError(err);
+            return;
         });
         if (!editedPost)
             fail = true;
@@ -180,6 +183,7 @@ router.delete('/posts/:postId', async(req, res) => {
         return row;
     }).catch(err => {
         reportError(err);
+        return;
     });
     if (isAllowedDelete) {
         // Then delete the post
@@ -190,6 +194,7 @@ router.delete('/posts/:postId', async(req, res) => {
             }
         }).catch(err => {
             reportError(err);
+            return;
         });
         if (!deletedPost)
             fail = true;
@@ -225,6 +230,7 @@ router.post('/login', async(req, res) => {
         else return null;
     }).catch(err => {
         console.log({ err });
+        return;
     });
 
     if (row) {
@@ -262,7 +268,8 @@ router.post('/signup', async(req, res) => {
         return row;
     }).catch(err => {
         console.log({ err });
-        res.res.status(500).json({ loggedIn: 0, error: "General catch-all error: Most likely this username is taken already." });
+        res.status(500).json({ loggedIn: 0, error: "General catch-all error: Most likely this username is taken already." });
+        return;
     });
 
     if (userCreated) {

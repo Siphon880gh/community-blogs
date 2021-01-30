@@ -42,8 +42,8 @@ router.get('/', async(req, res) => {
         // console.log(rows);
         return rows;
     }).catch(err => {
-        console.log({ err });
         res.json({ err });
+        return;
     });
     if (!posts) posts = [];
 
@@ -85,7 +85,8 @@ router.get('/dashboard', async(req, res) => {
         // console.log(rows);
         return rows;
     }).catch(err => {
-        console.log({ err });
+        res.json({ err });
+        return;
     });
 
     const postsWrapper = {
@@ -215,8 +216,8 @@ router.get('/posts/:postId/preview', async(req, res) => {
 
         return row;
     }).catch(err => {
-        console.log({ err });
         res.status(500).json({ error: "General catch-all error: Please report to server administrator GET /posts/:postId/preview failed." });
+        return;
     });
 
     if (post) {
