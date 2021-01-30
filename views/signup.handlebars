@@ -11,7 +11,7 @@
             </div>
             <div class="input-group">
                 <label for="password-signup">Password:</label>
-                <input type="password" id="password-signup" />
+                <input type="password" id="password-signup" minlength="4" required />
             </div>
             <div>
             <button class="standout" type="submit" data-route="/signup">Sign Up!</button>
@@ -29,14 +29,11 @@ $(".form-signup").on("submit", async(event)=>{
     debugger;
 
     if (username && password) {
-        debugger;
-        $.post("/api/signup", {username, password}).always((data,err)=>{
-            debugger;
+        $.post("/api/signup", {username, password}).always(data=>{
             if(data.loggedIn) {
                 document.location.pathname = "/";
             } else {
-                alert("Error: See browser console for details");
-                console.error({error});
+                alert(data.error);
             }
         });
     }
