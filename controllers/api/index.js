@@ -143,7 +143,7 @@ router.post('/signup', async(req, res) => {
         return row;
     }).catch(err => {
         console.log({ err });
-        res.json({ loggedIn: 0, error: "General catch all error: Most likely this username is taken already." });
+        res.res.status(500).json({ loggedIn: 0, error: "General catch-all error: Most likely this username is taken already." });
     });
 
     if (userCreated) {
@@ -158,7 +158,7 @@ router.post('/signup', async(req, res) => {
 
         res.status(200).json({ loggedIn: 1, userCreated });
     } else {
-        res.json({ loggedIn: 0, error: "General catch all error: Most likely this username is taken already." });
+        res.json({ loggedIn: 0, error: "General catch-all error: Most likely this username is taken already." });
     }
 
 });
