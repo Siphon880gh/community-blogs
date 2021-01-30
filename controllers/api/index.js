@@ -246,7 +246,6 @@ router.post('/login', async(req, res) => {
     } else {
         res.json({ loggedIn: 0 });
     }
-
 });
 
 router.post('/signup', async(req, res) => {

@@ -31,12 +31,23 @@
                     <a href="/dashboard">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/logout">Logout</a>
+                    <a href="/logout">
+                    Logout
+                    {{#if username}}
+                    <i class="loggedInUser">({{username}})</i>
+                    {{/if}}
+                    </a>
                 </li>
             </ul>
         </nav>
 
-        <h1 class="page-title">{{pageTitle}}</h1>
+        <h1 class="page-title">
+        {{#if pageTitle}}
+            {{pageTitle}}
+        {{else}}
+            The Tech Blog
+        {{/if}}    
+        </h1>
         <!-- The Tech Blog | Your Dashboard | -->
 
     </header>
