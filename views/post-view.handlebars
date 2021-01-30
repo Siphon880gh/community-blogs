@@ -9,9 +9,9 @@
         <div class="post-body">
             {{content}}
         </div> <!-- post-body -->
-        <div class="comments-wrapper" data-userid="{{userId}}" data-commentid="{{commentId}}">
+        <div class="comments-wrapper">
                 {{#each comments}}
-                    <div class="comment-wrapper">
+                    <div class="comment-wrapper" data-userid="{{userId}}" data-commentid="{{commentId}}">
                         <div class="comment-header">&nbsp;</div>
                         <div class="comment__body__footer">
                             <div>{{content}}</div>
@@ -24,14 +24,16 @@
                 {{#if canComment}}
                 <div class="comment-add-wrapper">
                     <div class="comment-header">&nbsp;</div>
-                    <div class="comment-add-body">
-                        <div class="input-group">
-                            <label for="add-comment">Comment:</label>
-                            <textarea id="add-comment-input" class="editing"></textarea>
+                    <form class="form-add-comment">
+                        <div class="comment-add-body">
+                            <div class="input-group">
+                                <label for="add-comment-input">Comment:</label>
+                                <textarea id="add-comment-input" class="editing"></textarea>
+                            </div>
+    
+                            <button class="add-comment standout" type="submit" data-route="/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
                         </div>
-
-                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
-                    </div>
+                    </form>
                 </div>
                 {{else}}
                 <div class="comment-sign-in pt-3">Want to add your comment? <a href="/login">Log in</a></div>
@@ -40,3 +42,33 @@
         </div> <!-- comments-wrapper -->
     </div> <!-- post-wrapper -->
 </div> <!-- posts-wrapper -->
+
+
+<script>
+$(".form-add-comment").on("submit", (event)=>{
+    // Prevent submit's default behavior of going to another webpage
+    event.preventDefault();
+
+    // Accumulate data to send to server for updating post
+    const otherDataAttributes = document.querySelector("#add-comment-input").closest(".post-wrapper").dataset;
+    const { postid } = otherDataAttributes;
+    const content = document.querySelector("#add-comment-input").value;
+    let data = {
+        postId: postid,
+        content
+    }
+    debugger;
+
+    // Easier to just refresh the page to show new comment due to limited time available for developing. 
+    // Future todo could be to make it render dynamically once user submits the comment.
+    const refreshUrl = document.location.pathname;
+
+    $.post(`/api/posts/${postid}/comments`, data).always(data=> {
+        if(data.success) {
+            window.location.reload();
+        } else {
+            alert(data.error);
+        }
+    }); // post
+}); // onsubmit
+</script>

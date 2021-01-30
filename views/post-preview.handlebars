@@ -26,7 +26,7 @@
 <script>
 // User updates post
 $(".form__update__delete .update-post-btn").on("click", ()=>{
-    // Prepare data to send to server for updating post
+    // Accumulate data to send to server for updating post
     const otherDataAttributes = document.querySelector("#edit-title").closest(".post-wrapper").dataset;
     const { postid, userid } = otherDataAttributes;
     const title = document.querySelector("#edit-title").value;
@@ -50,7 +50,7 @@ $(".form__update__delete .update-post-btn").on("click", ()=>{
 
 // User deletes post
 $(".form__update__delete .delete-post-btn").on("click", ()=>{
-    // Prepare data to send to server for updating post
+    // Accumulate data to send to server for updating post
     const otherDataAttributes = document.querySelector("#edit-title").closest(".post-wrapper").dataset;
     const { postid, userid } = otherDataAttributes;
     const title = document.querySelector("#edit-title").value;
