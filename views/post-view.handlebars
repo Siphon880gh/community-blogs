@@ -36,7 +36,7 @@
                     </form>
                 </div>
                 {{else}}
-                <div class="comment-sign-in pt-3">Want to add your comment? <a href="javascript:void(0)">Log in</a></div>
+                <div class="comment-sign-in pt-3">Want to add your comment? <a onclick="loginWithCallback()" href="javascript:void(0)">Log in</a></div>
                 {{/if}}
 
         </div> <!-- comments-wrapper -->
@@ -45,6 +45,12 @@
 
 
 <script>
+// Login to submit comment if user not logged in
+function loginWithCallback() {
+    document.location.href = "/login?callback=" + document.location.pathname;
+}
+
+// Submit comment
 $(".form-add-comment").on("submit", (event)=>{
     // Prevent submit's default behavior of going to another webpage
     event.preventDefault();
