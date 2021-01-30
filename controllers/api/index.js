@@ -22,10 +22,6 @@ router.get('/posts', (req, res) => {
     res.json({ todo: "Coming soon" });
 });
 
-router.get('/dashboard', (req, res) => {
-    // User must be logged in to view their own posts
-});
-
 router.post('/posts', (req, res) => {
     // User must be logged in to make post
     if (!req.session.loggedIn) {
@@ -97,14 +93,8 @@ router.post('/login', async(req, res) => {
         console.log({ err });
     });
 
-    // console.log({ row });
-    // process.exit(0);
-
     if (row) {
         const dbUserData = row;
-
-        // Start session:
-        // console.log({ dbUserData });
 
         req.session.loggedIn = 1;
         req.session.user = {
