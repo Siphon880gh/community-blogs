@@ -13,7 +13,7 @@ const hbs = exhbs.create({
     // Takes date-time from database and converts to human-readable date
     helpers: {
         date: function(sqlDate) {
-            const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+            const humanDate = moment(sqlDate).format("M/D/YYYY")
             return humanDate;
         }
     }
