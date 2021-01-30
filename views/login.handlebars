@@ -28,8 +28,18 @@ $(".form-login").on("submit", async(event)=>{
 
     if (username && password) {
         $.post("/api/login", {username, password}).then(data=>{
+
+            // If login successful, redirect to homepage or the activity the user was logging in for
+            // The activity user was logging in for is stored as a URL query ?callback=/path/to/prev/resource
+            // document.location.href must be used instead or the URL query will persist through future paths
             if(data.loggedIn) {
-                document.location.pathname = "/";
+                let p = new URLSearchParams(document.location.search);
+                let hasCallback = p.get("callback")
+                if(hasCallback) {
+                    let callback = p.get("callback");
+                    document.location.href = callback;
+                } else
+                    document.location.pathname = "/";
             } else {
                 alert("Error: Wrong username or password");
             }

@@ -60,7 +60,7 @@ router.get('/', async(req, res) => {
 router.get('/dashboard', async(req, res) => {
     // User must be logged in to view their own posts
     if (!req.session.loggedIn) {
-        res.redirect('/login');
+        res.redirect('/login?callback=/dashboard');
         return;
     }
 
