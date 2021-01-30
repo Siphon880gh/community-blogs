@@ -111,14 +111,87 @@ router.get('/posts/new', (req, res) => {
     res.render('post-new', dataStraightThrough);
 });
 
-router.get('/posts/:postId', (req, res) => {
+router.get('/posts/:postId', async(req, res) => {
     // User can view post regardless if logged in.
-    // Only they cannot comment if not logged in
-    let attachObject = {
-        loggedIn: req.session.loggedIn
+    const { postId } = req.params;
+
+    // Regardless user is logged in or not, either way, they can see a public post
+
+    // Grab User ID if user is logged in
+    const userId = req.session && req.session.loggedIn ? req.session.user.userId : null;
+
+    // Allow user to comment or not based on if there is User Id
+    let canComment = Boolean(userId);
+
+    // Debug:
+    // console.log({ userId, postId, canComment });
+    // process.exit(0);
+
+    // Multiple points of error possible
+    function reportError(err) {
+        if (!err) err = "No additional error.";
+        res.status(500).json({
+            success: 0,
+            error: "General catch-all error: Please report to server administrator that GET posts/:postId failed.",
+            additionalError: err
+        });
     }
 
-    res.render('post-view');
+    let onePost = await Post.findOne({
+        attributes: ["id", ["user_id", "userId"], "title", "content", "createdAt", "updatedAt"],
+        where: {
+            id: postId
+        },
+        include: [{
+                model: User,
+                attributes: ["id", "username"]
+            },
+            {
+                model: Comment,
+                attributes: [
+                    ["id", "commentId"], "content", ["user_id", "userId"], "createdAt", "updatedAt"
+                ],
+                include: {
+                    model: User,
+                    attributes: [
+                        ["id", "commentId"], "username"
+                    ]
+                }
+            }
+        ]
+    }).then(row => {
+        row = row.toJSON();
+
+        // Debug:
+        // console.log({ row });
+        // process.exit(0);
+
+        // Flatten post username to post
+        row.username = row.user.username;
+        delete row.user;
+
+        // Flatten comment username to comment
+        row.comments = row.comments.map(comment => {
+            comment.username = comment.user.username;
+            delete comment.user;
+            return comment;
+        });
+
+        return row;
+    }).catch(err => {
+        reportError(err);
+
+        // Redirect back to homepage's public posts
+        res.redirect("/");
+    });
+
+    if (onePost) {
+        onePost.canComment = canComment;
+        onePost.pageTitle = "The Tech Blog"
+        res.render('post-view', onePost);
+    } else {
+        res.render('post-missing', { pageTitle: "The Tech Blog" });
+    }
 });
 
 router.get('/posts/:postId/preview', async(req, res) => {
