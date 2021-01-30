@@ -56,15 +56,46 @@ router.get('/', async(req, res) => {
     // Homepage of all public posts
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async(req, res) => {
     // User must be logged in to view their own posts
     if (!req.session.loggedIn) {
         res.redirect('/login');
         return;
     }
 
+    let posts = await Post.findAll({
+        // attributes: ["id"]
+        where: {
+            user_id: req.session.user.userId
+        },
+        include: {
+            model: User
+        }
+    }).then(rows => {
+        rows = rows.map(row => {
+            // Flatten the row to result in a new field username
+            let myRow = row.dataValues;
+            delete myRow.user;
+            myRow.username = row.user.dataValues.username;
+            return myRow;
+        });
+
+        // console.log(rows);
+        return rows;
+    }).catch(err => {
+        console.log({ err });
+    });
+
+    const { userId } = req.session.user;
+
+    const postsWrapper = {
+        posts,
+        userId,
+        pageTitle: "Your Dashboard"
+    };
+
     // View their own posts
-    res.render('dashboard');
+    res.render('dashboard', postsWrapper);
 });
 
 router.get('/posts/new', (req, res) => {
@@ -104,17 +135,17 @@ router.get('/login', (req, res) => {
         return;
     }
 
-    let postStraightThrough = {};
-    postStraightThrough.pageTitle = "The Tech Blog";
+    let dataStraightThrough = {};
+    dataStraightThrough.pageTitle = "The Tech Blog";
 
-    res.render("login", postStraightThrough);
+    res.render("login", dataStraightThrough);
 });
 
 router.get('/signup', (req, res) => {
-    let postStraightThrough = {};
-    postStraightThrough.pageTitle = "The Tech Blog";
+    let dataStraightThrough = {};
+    dataStraightThrough.pageTitle = "The Tech Blog";
 
-    res.render("signup", postStraightThrough);
+    res.render("signup", dataStraightThrough);
 });
 
 router.get('/logout', (req, res) => {

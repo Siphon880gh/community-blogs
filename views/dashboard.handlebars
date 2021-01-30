@@ -1,1 +1,16 @@
-Dashboard reached
+<span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
+<div class="dashboard-posts-wrapper">
+    {{#each posts}}
+    <div class="dashboard-post-wrapper" data-postid="{{id}}" data-userid="{{user_id}}">
+        <header class="post-header">
+            <a href="javascript:void(0);" onclick="hasher.setHash('posts/' + this.closest('.dashboard-post-wrapper').dataset.postid + '/preview');">{{title}}</a>
+            <aside>
+                {{date createdAt}}
+            </aside>
+        </header>
+    </div> <!-- dashboard-post-wrapper -->
+    {{/each}}
+    <footer class="dashboard-btn-wrapper">
+        <button onclick="hasher.setHash('posts/new');" data-route="/posts/new">+ New Post</button>  
+    </footer>
+</div> <!-- dashboard-posts-wrapper -->
