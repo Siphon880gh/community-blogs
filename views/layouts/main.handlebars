@@ -10,10 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- CSS from my app -->
-    <!-- Workaround for deeper and deeper pathnames causing stylesheet to 404, eg. /posts/1, /posts/1/preview -->
-    <link rel="stylesheet" href="./public/assets/css/index.css">
-    <link rel="stylesheet" href="../public/assets/css/index.css">
-    <link rel="stylesheet" href="../../public/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
 
     <!-- JS Vendors: jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -51,7 +48,7 @@
         <!-- The Tech Blog | Your Dashboard | -->
 
     </header>
-    <main class="container" data-main>
+    <main class="container">
         {{{body}}}
     </main>
     <!-- container -->

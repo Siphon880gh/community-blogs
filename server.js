@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Expose CSS and js files
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "/public")));
 
 // Get routes
 app.use(require('./controllers/'));
