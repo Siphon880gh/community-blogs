@@ -49,7 +49,8 @@ router.get('/', async(req, res) => {
 
     const postsWrapper = {
         posts,
-        pageTitle: "The Tech Blog"
+        pageTitle: "The Tech Blog",
+        username: req.session && req.session.user ? req.session.user.username : null
     };
 
     res.render('homepage', postsWrapper);
@@ -92,7 +93,8 @@ router.get('/dashboard', async(req, res) => {
     const postsWrapper = {
         posts,
         userId,
-        pageTitle: "Your Dashboard"
+        pageTitle: "Your Dashboard",
+        username: req.session && req.session.user ? req.session.user.username : null
     };
 
     // View their own posts
@@ -186,12 +188,15 @@ router.get('/posts/:postId', async(req, res) => {
         res.redirect("/");
     });
 
+    // As usual, render username next to Logout link if logged in
+    const loggedInUsername = req.session && req.session.user ? req.session.user.username : null
     if (onePost) {
         onePost.canComment = canComment;
+        onePost.username = loggedInUsername;
         onePost.pageTitle = "The Tech Blog"
         res.render('post-view', onePost);
     } else {
-        res.render('post-missing', { pageTitle: "The Tech Blog" });
+        res.render('post-missing', { pageTitle: "The Tech Blog", username: loggedInUsername });
     }
 });
 
@@ -203,7 +208,7 @@ router.get('/posts/:postId/preview', async(req, res) => {
     }
 
     const { postId } = req.params;
-    const { userId } = req.session.user;
+    const { userId, username } = req.session.user;
 
     let post = await Post.findOne({
         attributes: ["id", "title", "content"],
@@ -228,7 +233,8 @@ router.get('/posts/:postId/preview', async(req, res) => {
             postId,
             userId,
             title,
-            content
+            content,
+            username
         };
         postWrapper.pageTitle = "Your Dashboard";
         res.render('post-preview', postWrapper);
@@ -246,6 +252,7 @@ router.get('/login', (req, res) => {
 
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = "The Tech Blog";
+    dataStraightThrough.pageTitle = req.session && req.session.user ? req.session.user.username : null;
 
     res.render("login", dataStraightThrough);
 });
@@ -253,6 +260,7 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = "The Tech Blog";
+    dataStraightThrough.pageTitle = req.session && req.session.user ? req.session.user.username : null;
 
     res.render("signup", dataStraightThrough);
 });

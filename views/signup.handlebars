@@ -25,7 +25,6 @@ $(".form-signup").on("submit", async(event)=>{
     event.preventDefault();
     let username = $("#username-signup").val();
     let password = $("#password-signup").val();
-    debugger;
 
     if (username && password) {
         $.post("/api/signup", {username, password}).always(data=>{
