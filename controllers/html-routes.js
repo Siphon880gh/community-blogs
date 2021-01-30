@@ -63,10 +63,12 @@ router.get('/dashboard', async(req, res) => {
         return;
     }
 
+    const { userId } = req.session.user;
+
     let posts = await Post.findAll({
         // attributes: ["id"]
         where: {
-            user_id: req.session.user.userId
+            user_id: userId
         },
         include: {
             model: User
@@ -85,8 +87,6 @@ router.get('/dashboard', async(req, res) => {
     }).catch(err => {
         console.log({ err });
     });
-
-    const { userId } = req.session.user;
 
     const postsWrapper = {
         posts,
@@ -121,14 +121,46 @@ router.get('/posts/:postId', (req, res) => {
     res.render('post-view');
 });
 
-router.get('/posts/:postId/preview', (req, res) => {
+router.get('/posts/:postId/preview', async(req, res) => {
     // User must be logged in to preview their post for editing or deleting
     if (!req.session.loggedIn) {
         res.redirect('/login');
         return;
     }
 
-    res.render('post-preview');
+    const { postId } = req.params;
+    const { userId } = req.session.user;
+
+    let post = await Post.findOne({
+        attributes: ["id", "title", "content"],
+        where: {
+            id: postId,
+            user_id: userId
+        }
+    }).then(row => {
+        row = row.toJSON();
+
+        return row;
+    }).catch(err => {
+        console.log({ err });
+        res.status(500).json({ error: "General catch-all error: Please report to server administrator GET /posts/:postId/preview failed." });
+    });
+
+    if (post) {
+
+        let { title, content } = post;
+
+        let postWrapper = {
+            postId,
+            userId,
+            title,
+            content
+        };
+        postWrapper.pageTitle = "Your Dashboard";
+        res.render('post-preview', postWrapper);
+    } else {
+        res.status(500).json({ error: "General catch-all error: Please report to server administrator GET /posts/:postId/preview failed." });
+    }
 });
 
 router.get('/login', (req, res) => {

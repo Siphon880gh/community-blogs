@@ -1,1 +1,23 @@
-Previewing a post for editing or deleting
+
+<div class="posts-wrapper">
+    <div class="post-wrapper" data-postid="{{postId}}" data-userid="{{userId}}">
+        <header class="post-header">
+            Edit Post
+        </header>
+        <div class="post-body">
+            <div class="input-group">
+                <label for="edit-title">Title:</label>
+                <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
+            </div>
+            <div class="input-group">
+                <label for="edit-content">Content:</label>
+                <textarea id="edit-content" class="editing">{{content}}</textarea>
+            </div>
+            <div class="preview-buttons">
+                <button class="update-post standout" onclick="alert('Prototype: Would update post')" data-route="/posts/:postId, PUT: title, content, postId">Update Post</button>
+                <button class="delete-post standout" onclick="alert('Prototype: Would delete post')" data-route="/posts/:postId, DELETE">Delete</button>
+            </div>
+        </div> <!-- post-body -->
+
+    </div> <!-- post-wrapper -->
+</div> <!-- posts-wrapper -->
