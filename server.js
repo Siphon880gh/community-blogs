@@ -15,6 +15,9 @@ const hbs = exhbs.create({
         date: function(sqlDate) {
             const humanDate = moment(sqlDate).format("M/D/YYYY")
             return humanDate;
+        },
+        CONSTANT_SITE_TITLE: function() {
+            return global.CONSTANT_SITE_TITLE;
         }
     }
 });

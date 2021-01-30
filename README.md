@@ -22,6 +22,7 @@ Table of Contents
 - [Demo](#demo)
 - [Screenshot](#screenshot)
 - [Installation](#installation)
+- [Customization](#customization)
 - [Usage](#usage)
 - [Contribution](#contribution)
 - [Tests](#tests)
@@ -33,6 +34,15 @@ Installation
 2. Make sure you have mysql cli installed. Run `mysql -u <USERNAME> -p` and enter password to access the mysql on your localhost or server.
 3. Create the database with `source db/schema.sql`. You `quit` now.
 4. Optionally, you can run `npm run seed` if you want to have some generic blogs to demo the app. 
+
+Customizing
+---
+### Site name
+1. You can change the website name in the `<title>` at ./views/layouts/main.handlebars if you do not want the theme to surround tech news.
+2. Change the website header title at ./controllers/html-routes.js at the variable assignment global.CONSTANT_SITE_TITLE.
+3. Optional, but you can also change the database name in MySQL from your own .env file's DB_NAME and the database value in db/schema.sql. Do not forget to run the MySQL shell and resource the schema.sql like in the installations.
+### Color themes
+You can change the color themes at public/index.css under the section `/* Themes */`. If using new variable names, make sure other CSS rules reflect your new variables.
 
 
 Usage
@@ -72,6 +82,8 @@ There are two test folders: __test__ and __test2__. You can run them respectivel
 The reason for separating them is that the first test command is meant to run all test suites in __test__, which is what you expect. 
 
 However, at __test2__ each test suite will have to run after dropping and recreating the database (with `source schema/db.sql` in the MySQL2 shell) due to Sequelize not being able to drop databases and that the teste suites need completely fresh setups of the database.
+
+The Jest file matching patterns for __test__ are in package.json, whereas thoes for __test2__ are in the file ./jest.test2.config.json.
 
 Questions
 ---

@@ -2,6 +2,9 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 
+// Set your website's name
+global.CONSTANT_SITE_TITLE = "The Tech Blog";
+
 // Workaround when you're at /post/:postId, and clicking another link like /dashboard goes to /post/dashboard
 // Then it will redirect one level up to get rid of /post so you can arrive to /dashboard
 router.get('/posts/posts', (req, res) => {
@@ -49,7 +52,7 @@ router.get('/', async(req, res) => {
 
     const postsWrapper = {
         posts,
-        pageTitle: "The Tech Blog",
+        pageTitle: global.CONSTANT_SITE_TITLE,
         username: req.session && req.session.user ? req.session.user.username : null
     };
 
@@ -193,10 +196,10 @@ router.get('/posts/:postId', async(req, res) => {
     if (onePost) {
         onePost.canComment = canComment;
         onePost.username = loggedInUsername;
-        onePost.pageTitle = "The Tech Blog"
+        onePost.pageTitle = global.CONSTANT_SITE_TITLE
         res.render('post-view', onePost);
     } else {
-        res.render('post-missing', { pageTitle: "The Tech Blog", username: loggedInUsername });
+        res.render('post-missing', { pageTitle: global.CONSTANT_SITE_TITLE, username: loggedInUsername });
     }
 });
 
@@ -251,7 +254,7 @@ router.get('/login', (req, res) => {
     }
 
     let dataStraightThrough = {};
-    dataStraightThrough.pageTitle = "The Tech Blog";
+    dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
     dataStraightThrough.pageTitle = req.session && req.session.user ? req.session.user.username : null;
 
     res.render("login", dataStraightThrough);
@@ -259,7 +262,7 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
     let dataStraightThrough = {};
-    dataStraightThrough.pageTitle = "The Tech Blog";
+    dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
     dataStraightThrough.pageTitle = req.session && req.session.user ? req.session.user.username : null;
 
     res.render("signup", dataStraightThrough);
