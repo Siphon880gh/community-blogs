@@ -23,6 +23,7 @@
 </div> <!-- posts-wrapper -->
 
 <script>
+// Create new post
 $(".form-new-post").on("submit", async(event)=>{
     event.preventDefault();
     let title = $("#new-title").val();
@@ -37,5 +38,10 @@ $(".form-new-post").on("submit", async(event)=>{
             }
         });
     }
+});
+
+// Grow textarea as you type
+$(()=>{
+    autoresizeTextarea();
 });
 </script>
