@@ -13,7 +13,7 @@
     "scripts": {
         "start": "node server.js",
         "seed": "node seeds/",
-        "watch": "nodemon server.js",
+        "watch": "nodemon  --trace-warnings server.js",
         "test": "jest",
         "test2": "jest --config ./jest.test2.config.json"
     },
