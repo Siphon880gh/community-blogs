@@ -2,18 +2,35 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { Post, User, Comment } = require('../../models');
 
-router.post('/comments', (req, res) => {
+router.post('/posts/:postId/comments', async(req, res) => {
     // User must be logged in to post comment
     if (!req.session.loggedIn) {
         res.status(403).json({ error: "403 Forbidden Resource. User not logged in." });
         return;
     }
 
-    // TODO: At the template, content is from #add-comment-input textarea
-    const { postId, content } = req.body;
-    const { userId, username } = req.session.user;
+    const { postId } = req.params;
+    const { content } = req.body;
+    const { userId } = req.session.user;
 
-    res.json({ todo: "Coming soon" });
+    // Debug
+    // console.log({ postId, body: req.body, userId });
+    // process.exit(0);
+
+    let commentCreated = await Comment.create({
+            content,
+            user_id: userId,
+            post_id: postId
+        }).then(row => row.toJSON())
+        .catch(err => {
+            res.status(403).json({ success: 0, error: "aa - General catch-all error: Please report to server administrator that POST api/posts/:postId/comments failed." });
+            return;
+        });
+    if (commentCreated) {
+        res.json({ success: 1 });
+    } else {
+        res.status(403).json({ success: 0, error: "Error: Unable to create comment. Likely your session expired." });
+    }
 });
 
 

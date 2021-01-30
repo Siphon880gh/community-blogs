@@ -141,9 +141,9 @@
                         <div class="post-body">
                             {{content}}
                         </div> <!-- post-body -->
-                        <div class="comments-wrapper" data-userid="{{userId}}" data-commentid="{{commentId}}">
+                        <div class="comments-wrapper">
                                 {{#each comments}}
-                                    <div class="comment-wrapper">
+                                    <div class="comment-wrapper" data-userid="{{userId}}" data-commentid="{{commentId}}">
                                         <div class="comment-header">&nbsp;</div>
                                         <div class="comment__body__footer">
                                             <div>{{content}}</div>
