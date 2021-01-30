@@ -125,17 +125,66 @@ router.put('/posts/:postId', async(req, res) => {
         res.json({ success: 1, editedPost });
 });
 
-router.delete('/posts/:postId', (req, res) => {
+router.delete('/posts/:postId', async(req, res) => {
     // User must be logged in to delete their post
     if (!req.session.loggedIn) {
         res.status(403).json({ error: "403 Forbidden Resource. User not logged in." });
         return;
     }
 
-    const { title, content } = req.body;
-    const { userId, username } = req.session.user;
+    // Grab relevant data
+    const { postId } = req.body;
+    const { userId } = req.session.user;
 
-    res.json({ todo: "Coming soon" });
+    // Multiple points of error possible
+    function reportError(err) {
+        if (!err) err = "No additional error.";
+        res.status(500).json({
+            success: 0,
+            error: "General catch-all error: Most likely unauthorized deleting or database error. Please report to server administrator.",
+            additionalError: err
+        });
+    }
+
+    // This request can fail for reasons of unauthorized deleting or database error
+    let fail = false;
+
+    // This variable will store successfully deleted post information. Has to be declared here, otherwise scoping problems.
+    let deletedPost = null;
+
+    // Can the current user delete this post?
+    const isAllowedDelete = await Post.findOne({
+        where: {
+            user_id: userId,
+            id: postId
+        }
+    }).then(row => {
+        if (row) row = row.get({ plain: true });
+        return row;
+    }).catch(err => {
+        reportError(err);
+    });
+    if (isAllowedDelete) {
+        // Then delete the post
+        deletedPost = await Post.destroy({
+            where: {
+                user_id: userId,
+                id: postId
+            }
+        }).catch(err => {
+            reportError(err);
+        });
+        if (!deletedPost)
+            fail = true;
+    } else {
+        fail = true;
+    }
+
+    // If user has no permission or post deletion fails
+    if (fail)
+        reportError();
+    else
+        res.json({ success: 1, deletedPost });
 });
 
 router.post('/login', async(req, res) => {
