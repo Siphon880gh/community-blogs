@@ -15,22 +15,12 @@ User.init({
     },
     username: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [4]
-        }
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
+        allowNull: false
     }
 }, {
     hooks: {
@@ -40,17 +30,11 @@ User.init({
             return newUserData;
         },
 
+        // Future updating password feature
         async beforeUpdate(updatedUserData) {
             updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
             return updatedUserData;
-        },
-
-        // async beforeFind(userData) {
-        //     // console.log({ userData });
-        //     // process.exit(0);
-        //     userData.where.password = await bcrypt.hash(userData.where.password, 10);
-        //     return userData;
-        // }
+        }
     },
     sequelize: sequelizeConnection,
     timestamps: false,

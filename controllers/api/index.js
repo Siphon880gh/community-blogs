@@ -104,7 +104,7 @@ router.post('/login', async(req, res) => {
         const dbUserData = row;
 
         // Start session:
-        console.log({ dbUserData });
+        // console.log({ dbUserData });
 
         req.session.loggedIn = 1;
         req.session.user = {
@@ -119,10 +119,42 @@ router.post('/login', async(req, res) => {
 
 });
 
-router.post('/signup', (req, res) => {
-    // Signing up
-    // TODO: Signing up
-    // res.render("signup");
+router.post('/signup', async(req, res) => {
+    // If user logged in, log user out
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {});
+    }
+    const { username, password } = req.body;
+
+    let userCreated = await User.create({
+        username,
+        password
+    }).then(async(row) => {
+        if (row) row = row.get({ plain: true });
+
+        // Password is removed
+        delete row.password;
+
+        return row;
+    }).catch(err => {
+        console.log({ err });
+    });
+
+    if (userCreated) {
+        // Start session:
+        // console.log({ userCreated });
+
+        req.session.loggedIn = 1;
+        req.session.user = {
+            userId: userCreated.id,
+            username: userCreated.username
+        };
+
+        res.status(200).json({ loggedIn: 1, userCreated });
+    } else {
+        res.status(403).json({ loggedIn: 0, error: "Unable to create user" });
+    }
+
 });
 
 router.get('/logout', (req, res) => {
