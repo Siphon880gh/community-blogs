@@ -31,6 +31,8 @@ $(".form-login").on("submit", async(event)=>{
         $.post("/api/login", {username, password}).then(data=>{
             if(data.loggedIn) {
                 document.location.pathname = "/";
+            } else {
+                alert("Error: Wrong username or password");
             }
         });
     }
