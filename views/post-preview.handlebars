@@ -1,23 +1,51 @@
-
 <div class="posts-wrapper">
     <div class="post-wrapper" data-postid="{{postId}}" data-userid="{{userId}}">
         <header class="post-header">
             Edit Post
         </header>
         <div class="post-body">
-            <div class="input-group">
-                <label for="edit-title">Title:</label>
-                <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
-            </div>
-            <div class="input-group">
-                <label for="edit-content">Content:</label>
-                <textarea id="edit-content" class="editing">{{content}}</textarea>
-            </div>
-            <div class="preview-buttons">
-                <button class="update-post standout" onclick="alert('Prototype: Would update post')" data-route="/posts/:postId, PUT: title, content, postId">Update Post</button>
-                <button class="delete-post standout" onclick="alert('Prototype: Would delete post')" data-route="/posts/:postId, DELETE">Delete</button>
+            <div class="form__update__delete">
+                <div class="input-group">
+                    <label for="edit-title">Title:</label>
+                    <input id="edit-title" type="text" class="editing" value="{{title}}"></input>
+                </div>
+                <div class="input-group">
+                    <label for="edit-content">Content:</label>
+                    <textarea id="edit-content" class="editing">{{content}}</textarea>
+                </div>
+                <div class="preview-buttons">
+                    <button class="update-post-btn standout" data-route="/api/posts/:postId, PUT: title, content, postId">Update Post</button>
+                    <button class="delete-post-btn standout" data-route="/api/posts/:postId, DELETE">Delete</button>
+                </div>
             </div>
         </div> <!-- post-body -->
 
     </div> <!-- post-wrapper -->
 </div> <!-- posts-wrapper -->
+
+<script>
+// User updates post
+$(".form__update__delete .update-post-btn").on("click", ()=>{
+    // Prepare data to send to server for updating post
+    const otherDataAttributes = document.querySelector("#edit-title").closest(".post-wrapper").dataset;
+    const { postid, userid } = otherDataAttributes;
+    const title = document.querySelector("#edit-title").value;
+    const content = document.querySelector("#edit-content").value;
+
+    const data = {
+        postId: postid,
+        userId: userid,
+        title,
+        content
+    }
+
+    $.ajax({method:"PUT", url: "/api/posts/:postId", data}).always(data=>{
+        debugger;
+        if(data.success) {
+            document.location.pathname = "/dashboard";
+        } else {
+            alert(data.error);
+        }
+    });
+})
+</script>

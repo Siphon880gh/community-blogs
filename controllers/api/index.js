@@ -59,17 +59,70 @@ router.get('/posts/:postId', (req, res) => {
     res.json({ todo: "Coming soon" });
 });
 
-router.put('/posts/:postId', (req, res) => {
+router.put('/posts/:postId', async(req, res) => {
     // User must be logged in to edit their post
     if (!req.session.loggedIn) {
         res.status(403).json({ error: "403 Forbidden Resource. User not logged in." });
         return;
     }
 
-    const { title, content } = req.body;
+    // Grab relevant data
+    const { title, content, postId } = req.body;
     const { userId, username } = req.session.user;
 
-    res.json({ todo: "Coming soon" });
+    // Multiple points of error possible
+    function reportError(err) {
+        if (!err) err = "No additional error.";
+        res.status(500).json({
+            success: 0,
+            error: "General catch-all error: Most likely unauthorized editing or database error. Please report to server administrator.",
+            additionalError: err
+        });
+    }
+
+    // This request can fail for reasons of unauthorized editing or database error
+    let fail = false;
+
+    // This variable will store successfully edited post. Has to be declared here, otherwise scoping problems.
+    let editedPost = null;
+
+    // Can the current user edit this post?
+    let isAllowedEdit = await Post.findOne({
+        where: {
+            user_id: userId,
+            id: postId
+        }
+    }).then(row => {
+        if (row) row = row.get({ plain: true });
+        return row;
+    }).catch(err => {
+        reportError(err);
+    });
+    if (isAllowedEdit) {
+        // Then save the post edit
+        editedPost = await Post.update({
+            title,
+            content
+        }, {
+            where: {
+                user_id: userId,
+                id: postId
+            }
+        }).catch(err => {
+            reportError(err);
+        });
+        if (!editedPost)
+            fail = true;
+    } else {
+        // Not allowed writing access because post does not belong to user
+        fail = true;
+    }
+
+    // If user has no permission or post edit fails
+    if (fail)
+        reportError();
+    else
+        res.json({ success: 1, editedPost });
 });
 
 router.delete('/posts/:postId', (req, res) => {
