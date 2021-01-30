@@ -1,1 +1,42 @@
-Viewing a post for commenting
+<div class="posts-wrapper">
+    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
+        <header class="post-header">
+            <span>{{title}}</span>
+            <aside>
+                Posted by {{username}} on {{date createdAt}}
+            </aside>
+        </header>
+        <div class="post-body">
+            {{content}}
+        </div> <!-- post-body -->
+        <div class="comments-wrapper" data-userid="{{userId}}" data-commentid="{{commentId}}">
+                {{#each comments}}
+                    <div class="comment-wrapper">
+                        <div class="comment-header">&nbsp;</div>
+                        <div class="comment__body__footer">
+                            <div>{{content}}</div>
+                            <footer class="comment-footer">
+                                — {{username}}, {{date createdAt}}
+                            </footer>
+                        </div>
+                    </div>
+                {{/each}}
+                {{#if canComment}}
+                <div class="comment-add-wrapper">
+                    <div class="comment-header">&nbsp;</div>
+                    <div class="comment-add-body">
+                        <div class="input-group">
+                            <label for="add-comment">Comment:</label>
+                            <textarea id="add-comment-input" class="editing"></textarea>
+                        </div>
+
+                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
+                    </div>
+                </div>
+                {{else}}
+                <div class="comment-sign-in pt-3">Want to add your comment? <a href="/login">Log in</a></div>
+                {{/if}}
+
+        </div> <!-- comments-wrapper -->
+    </div> <!-- post-wrapper -->
+</div> <!-- posts-wrapper -->
