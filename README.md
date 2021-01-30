@@ -10,7 +10,7 @@ The blog times out and logs you out after 2 minutes of idleness.
 
 Demo
 ---
-Soon
+[Try it out now!](https://community-blogs-wff.herokuapp.com/)
 
 Screenshot
 ---
