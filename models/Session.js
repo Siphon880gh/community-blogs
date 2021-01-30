@@ -14,7 +14,8 @@ const Session = sequelizeConnection.define('Session', {
         type: DataTypes.DATE
     },
     data: {
-        type: DataTypes.STRING(50000)
+        // type: DataTypes.STRING(50000) // Error: Too big for column
+        type: DataTypes.TEXT
     }
 }, {
     tableName: 'Session',

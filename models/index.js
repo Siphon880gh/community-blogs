@@ -2,7 +2,7 @@
 const Post = require('./Post');
 const User = require('./User');
 const Comment = require('./Comment');
-// const Session = require('./Session');
+const Session = require('./Session');
 
 // create associations
 console.log(`Create associations: Each post has post owner, title, content`);
@@ -47,5 +47,4 @@ Comment.belongsTo(User, {
 });
 
 
-module.exports = { User, Post, Comment };
-// module.exports = { User, Post, Comment, Session };
+module.exports = { User, Post, Comment, Session };
