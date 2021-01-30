@@ -42,11 +42,8 @@ beforeAll(async() => {
 
         const success = await Post.create({
             title,
-            content
-        }, {
-            where: {
-                user_id: userId
-            }
+            content,
+            user_id: userId
         });
         if (success) {
             // res.redirect("/homepage");

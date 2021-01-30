@@ -22,18 +22,33 @@ router.get('/posts', (req, res) => {
     res.json({ todo: "Coming soon" });
 });
 
-router.post('/posts', (req, res) => {
+router.post('/posts', async(req, res) => {
     // User must be logged in to make post
     if (!req.session.loggedIn) {
         res.status(403).json({ error: "403 Forbidden Resource. User not logged in." });
         return;
     }
 
-    // TODO: At the template, content is from #add-comment-input textarea
     const { title, content } = req.body;
     const { userId, username } = req.session.user;
 
-    res.json({ todo: "Coming soon" });
+    // console.log({ title, content, userId, username });
+    // process.exit(0);
+
+    let postCreated = await Post.create({
+        title,
+        content,
+        user_id: userId
+    }).then(row => {
+        return row;
+    }).catch(err => {
+        res.status(500).json({ error: err });
+    });
+    if (postCreated) {
+        res.status(200).json({ success: postCreated }).redirect("/dashboard");
+    } else {
+        res.status(500).json({ error: "General catch-all error: Please report to server administrator POST /posts failed." });
+    }
 });
 
 router.get('/posts/:postId', (req, res) => {

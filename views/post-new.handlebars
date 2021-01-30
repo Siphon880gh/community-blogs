@@ -1,1 +1,42 @@
-Form to create new post
+<span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
+<div class="posts-wrapper">
+    <div class="post-wrapper" data-postid="{{id}}" data-userid="{{userId}}">
+        <header class="post-header">
+            Create New Post
+        </header>
+        <div class="post-body">
+            <form class="form-new-post">
+                <div class="input-group">
+                    <label for="new-title">Title:</label>
+                    <input id="new-title" type="text" class="editing" value="{{title}}"></input>
+                </div>
+                <div class="input-group">
+                    <label for="new-content">Content:</label>
+                    <textarea id="new-content" class="editing">{{content}}</textarea>
+                </div>
+                <div class="preview-buttons">
+                    <button class="create-post standout" data-route="/api/posts, POST: title, content, userId">Create</button>
+                </div>
+            </form>
+        </div> <!-- post-body -->
+
+    </div> <!-- post-wrapper -->
+</div> <!-- posts-wrapper -->
+
+<script>
+$(".form-new-post").on("submit", async(event)=>{
+    event.preventDefault();
+    let title = $("#new-title").val();
+    let content = $("#new-content").val();
+
+    if (title && content) {
+        $.post("/api/posts", {title, content}).always(data=>{
+            if(data.success) {
+                document.location.pathname = "/dashboard";
+            } else {
+                alert(data.error);
+            }
+        });
+    }
+});
+</script>

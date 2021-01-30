@@ -105,7 +105,10 @@ router.get('/posts/new', (req, res) => {
         return;
     }
 
-    res.render('post-new');
+    let dataStraightThrough = {};
+    dataStraightThrough.pageTitle = "Your Dashboard";
+
+    res.render('post-new', dataStraightThrough);
 });
 
 router.get('/posts/:postId', (req, res) => {
