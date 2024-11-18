@@ -29,10 +29,15 @@
                     <a href="/app/community-tech-blogs/dashboard">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/app/community-tech-blogs/logout">
-                    Logout
                     {{#if username}}
-                    <i class="loggedInUser">({{username}})</i>
+                        <a href="/app/community-tech-blogs/logout">
+                            Logout
+                            <i class="loggedInUser">({{username}})</i>
+                        </a>
+                    {{else}}
+                        <a href="/app/community-tech-blogs/login">
+                            Login
+                        </a>
                     {{/if}}
                     </a>
                 </li>
