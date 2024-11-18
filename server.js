@@ -5,6 +5,7 @@ const path = require("path");
 const sequelizeConnection = require("./config/connection.js");
 require("dotenv").config();
 const moment = require("moment");
+require("dotenv").config();
 
 // Initiate Express-Handlebars
 const exhbs = require("express-handlebars");
