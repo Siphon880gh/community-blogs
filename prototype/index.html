@@ -57,7 +57,7 @@
 
     </header>
     <main class="container" data-main>
-        <section id="homepage" class="d-none" data-view data-route="/homepage">
+        <section id="homepage" class="d-none" data-view data-route="/app/community-blogs/homepage">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -78,7 +78,7 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="dashboard" class="d-none" data-view data-route="/dashboard">
+        <section id="dashboard" class="d-none" data-view data-route="/app/community-blogs/dashboard">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -94,12 +94,12 @@
                     </div> <!-- dashboard-post-wrapper -->
                     {{/each}}
                     <footer class="dashboard-btn-wrapper">
-                        <button onclick="hasher.setHash('posts/new');" data-route="/posts/new">+ New Post</button>  
+                        <button onclick="hasher.setHash('posts/new');" data-route="/app/community-blogs/posts/new">+ New Post</button>  
                     </footer>
                 </div> <!-- dashboard-posts-wrapper -->
             </template>
         </section>
-        <section id="post-new" class="d-none" data-view data-route="/posts/new">
+        <section id="post-new" class="d-none" data-view data-route="/app/community-blogs/posts/new">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -118,7 +118,7 @@
                                 <textarea id="edit-content" class="editing">{{content}}</textarea>
                             </div>
                             <div class="preview-buttons">
-                                <button class="create-post standout" onclick="alert('Prototype: Would create post.')" data-route="/api/posts, POST: title, content, userId">Create</button>
+                                <button class="create-post standout" onclick="alert('Prototype: Would create post.')" data-route="/app/community-blogs/api/posts, POST: title, content, userId">Create</button>
                             </div>
                         </div> <!-- post-body -->
 
@@ -126,7 +126,7 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="post-view" class="d-none" data-view data-route="/posts/:postId">
+        <section id="post-view" class="d-none" data-view data-route="/app/community-blogs/posts/:postId">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -161,7 +161,7 @@
                                             <textarea id="add-comment-input" class="editing"></textarea>
                                         </div>
 
-                                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
+                                        <button class="add-comment standout" onclick="alert('Prototype: Would add comment to post')" data-route="/app/community-blogs/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
                                     </div>
                                 </div>
                         </div> <!-- comments-wrapper -->
@@ -170,7 +170,7 @@
             </template>
         </section>
 
-        <section id="post-preview" class="d-none" data-view data-route="/posts/:postId/preview">
+        <section id="post-preview" class="d-none" data-view data-route="/app/community-blogs/posts/:postId/preview">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -189,8 +189,8 @@
                                 <textarea id="edit-content" class="editing">{{content}}</textarea>
                             </div>
                             <div class="preview-buttons">
-                                <button class="update-post standout" onclick="alert('Prototype: Would update post')" data-route="/posts/:postId, PUT: title, content, postId">Update Post</button>
-                                <button class="delete-post standout" onclick="alert('Prototype: Would delete post')" data-route="/posts/:postId, DELETE">Delete</button>
+                                <button class="update-post standout" onclick="alert('Prototype: Would update post')" data-route="/app/community-blogs/posts/:postId, PUT: title, content, postId">Update Post</button>
+                                <button class="delete-post standout" onclick="alert('Prototype: Would delete post')" data-route="/app/community-blogs/posts/:postId, DELETE">Delete</button>
                             </div>
                         </div> <!-- post-body -->
 
@@ -198,7 +198,7 @@
                 </div> <!-- posts-wrapper -->
             </template>
         </section>
-        <section id="login" class="d-none" data-view data-route="/login, POST">
+        <section id="login" class="d-none" data-view data-route="/app/community-blogs/login, POST">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -217,15 +217,15 @@
                               <input type="password" id="password-login" />
                             </div>
                             <div>
-                              <button class="standout" type="submit" onclick="alert('Prototype: Would login');" data-route="/login">Login</button>
-                              <a href="javascript:void(0);" onclick="hasher.setHash('signup/')" data-route="/signup">Sign up instead</a>
+                              <button class="standout" type="submit" onclick="alert('Prototype: Would login');" data-route="/app/community-blogs/login">Login</button>
+                              <a href="javascript:void(0);" onclick="hasher.setHash('signup/')" data-route="/app/community-blogs/signup">Sign up instead</a>
                             </div>
                           </form>
                     </div> <!-- form-body -->
                 </div> <!-- form-wrapper -->
             </template>
         </section>
-        <section id="signup" class="d-none" data-view data-route="/signup">
+        <section id="signup" class="d-none" data-view data-route="/app/community-blogs/signup">
             <article></article>
             <template>
                 <span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
@@ -244,8 +244,8 @@
                             <input type="password" id="password-signup" />
                             </div>
                             <div>
-                            <button class="standout" type="submit" onclick="alert('Prototype: Would signup');" data-route="/signup">Sign Up!</button>
-                            <a href="javascript:void(0);" onclick="hasher.setHash('login/')" data-route="/login">Login instead</a>
+                            <button class="standout" type="submit" onclick="alert('Prototype: Would signup');" data-route="/app/community-blogs/signup">Sign Up!</button>
+                            <a href="javascript:void(0);" onclick="hasher.setHash('login/')" data-route="/app/community-blogs/login">Login instead</a>
                             </div>
                         </form>
                     </div> <!-- form-body -->

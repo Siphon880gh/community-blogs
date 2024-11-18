@@ -31,12 +31,12 @@
                                 <textarea id="add-comment-input" class="editing"></textarea>
                             </div>
     
-                            <button class="add-comment standout" type="submit" data-route="/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
+                            <button class="add-comment standout" type="submit" data-route="/app/community-blogs/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
                         </div>
                     </form>
                 </div>
                 {{else}}
-                <div class="comment-sign-in pt-3">Want to add your comment? <a onclick="loginWithCallback()" href="javascript:void(0)">Log in</a></div>
+                <div class="comment-sign-in pt-3">Want to add your comment? <a onclick="login()" href="javascript:void(0)">Log in</a></div>
                 {{/if}}
 
         </div> <!-- comments-wrapper -->
@@ -48,6 +48,9 @@
 // Login to submit comment if user not logged in
 function loginWithCallback() {
     document.location.href = "/login?callback=" + document.location.pathname;
+}
+function login() {
+    document.location.href = "/app/community-blogs/login";
 }
 
 // Submit comment
@@ -67,9 +70,9 @@ $(".form-add-comment").on("submit", (event)=>{
 
     // Easier to just refresh the page to show new comment due to limited time available for developing. 
     // Future todo could be to make it render dynamically once user submits the comment.
-    const refreshUrl = document.location.pathname;
+    // const refreshUrl = document.location.pathname;
 
-    $.post(`/api/posts/${postid}/comments`, data).always(data=> {
+    $.post(`/app/community-blogs/api/posts/${postid}/comments`, data).always(data=> {
         if(data.success) {
             window.location.reload();
         } else {

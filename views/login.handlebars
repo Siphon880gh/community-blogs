@@ -14,7 +14,7 @@
             </div>
             <div>
                 <button class="standout" type="submit" data-route="/login">Login</button>
-                <a href="/signup">Sign up instead</a>
+                <a href="/app/community-blogs/signup">Sign up instead</a>
             </div>
             </form>
     </div> <!-- form-body -->
@@ -27,7 +27,7 @@ $(".form-login").on("submit", async(event)=>{
     let password = $("#password-login").val();
 
     if (username && password) {
-        $.post("/api/login", {username, password}).then(data=>{
+        $.post("/app/community-blogs/api/login", {username, password}).then(data=>{
 
             // If login successful, redirect to homepage or the activity the user was logging in for
             // The activity user was logging in for is stored as a URL query ?callback=/path/to/prev/resource
@@ -39,7 +39,7 @@ $(".form-login").on("submit", async(event)=>{
                     let callback = p.get("callback");
                     document.location.href = callback;
                 } else
-                    document.location.pathname = "/";
+                    document.location.href = "/app/community-blogs";
             } else {
                 alert("Error: Wrong username or password");
             }

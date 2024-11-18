@@ -13,8 +13,8 @@
                 <input type="password" id="password-signup" minlength="4" required />
             </div>
             <div>
-            <button class="standout" type="submit" data-route="/signup">Sign Up!</button>
-            <a href="/login">Login instead</a>
+            <button class="standout" type="submit" data-route="/app/community-blogs/signup">Sign Up!</button>
+            <a href="/app/community-blogs/login">Login instead</a>
             </div>
         </form>
     </div> <!-- form-body -->
@@ -27,9 +27,9 @@ $(".form-signup").on("submit", async(event)=>{
     let password = $("#password-signup").val();
 
     if (username && password) {
-        $.post("/api/signup", {username, password}).always(data=>{
+        $.post("/app/community-blogs/api/signup", {username, password}).always(data=>{
             if(data.loggedIn) {
-                document.location.pathname = "/";
+                document.location.href = "/app/community-blogs";
             } else {
                 alert(data.error);
             }

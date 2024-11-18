@@ -6,24 +6,25 @@ const sequelizeConnection = require('../config/connection');
 const { Comment, Post, User, Session } = require("../models");
 
 const seedAll = async() => {
+    // Reset database
     await sequelizeConnection.sync({ force: true });
 
     console.log("Create sample data for testing purposes");
     console.log("a. Must have users before there are posts");
     await User.bulkCreate([{
-            username: 'testUser', // id 1
-            email: 'testUser@domain.com',
-            password: 'testUser'
+            username: 'test', // id 1
+            email: 'test@test.com',
+            password: 'test'
         },
         {
-            username: 'testUser2', // id 2
-            password: 'testUser2',
-            email: 'testUser2@domain.com'
+            username: 'test2', // id 2
+            password: 'test2',
+            email: 'test2@test.com'
         },
         {
-            username: 'testUser3', // id 3
-            password: 'testUser3',
-            email: 'testUser3@domain.com'
+            username: 'test3', // id 3
+            password: 'test3',
+            email: 'test3@test.com'
         }
     ], { individualHooks: true });
 

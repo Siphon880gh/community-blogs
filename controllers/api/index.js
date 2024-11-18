@@ -63,7 +63,7 @@ router.post('/posts', async(req, res) => {
         return;
     });
     if (postCreated) {
-        res.status(200).json({ success: postCreated }).redirect("/dashboard");
+        res.status(200).json({ success: postCreated }).redirect("/app/community-blogs/dashboard");
     } else {
         res.status(500).json({ error: "General catch-all error: Please report to server administrator POST /posts failed." });
     }
@@ -293,11 +293,11 @@ router.get('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             // res.status(204).json({ loggedIn: 0 });
-            res.status(204).redirect("../login");
+            res.status(204).redirect("/app/community-blogs/login");
         });
     } else {
         // res.status(404).json({ loggedIn: 0 });
-        res.status(404).redirect("../login");
+        res.status(404).redirect("/app/community-blogs/login");
     }
 });
 

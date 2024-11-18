@@ -8,19 +8,19 @@ global.CONSTANT_SITE_TITLE = "The Tech Blog";
 // Workaround when you're at /post/:postId, and clicking another link like /dashboard goes to /post/dashboard
 // Then it will redirect one level up to get rid of /post so you can arrive to /dashboard
 router.get('/posts/posts', (req, res) => {
-    res.redirect("../posts");
+    res.redirect("/app/community-blogs/posts");
     return;
 });
 router.get('/posts/login', (req, res) => {
-    res.redirect("../login");
+    res.redirect("/app/community-blogs/login");
     return;
 });
 router.get('/posts/signup', (req, res) => {
-    res.redirect("../signup");
+    res.redirect("/app/community-blogs/signup");
     return;
 });
 router.get('/posts/dashboard', (req, res) => {
-    res.redirect("../dashboard");
+    res.redirect("/app/community-blogs/dashboard");
     return;
 });
 
@@ -63,7 +63,8 @@ router.get('/', async(req, res) => {
 router.get('/dashboard', async(req, res) => {
     // User must be logged in to view their own posts
     if (!req.session.loggedIn) {
-        res.redirect('/login?callback=/dashboard');
+        // res.redirect('/login?callback=/dashboard');
+        res.redirect('/app/community-blogs/login');
         return;
     }
 
@@ -107,7 +108,7 @@ router.get('/dashboard', async(req, res) => {
 router.get('/posts/new', (req, res) => {
     // User must be logged in to create a post
     if (!req.session.loggedIn) {
-        res.redirect('/login');
+        res.redirect('/app/community-blogs/login');
         return;
     }
 
@@ -188,7 +189,7 @@ router.get('/posts/:postId', async(req, res) => {
         reportError(err);
 
         // Redirect back to homepage's public posts
-        res.redirect("/");
+        res.redirect("/app/community-blogs/");
     });
 
     // As usual, render username next to Logout link if logged in
@@ -206,7 +207,7 @@ router.get('/posts/:postId', async(req, res) => {
 router.get('/posts/:postId/preview', async(req, res) => {
     // User must be logged in to preview their post for editing or deleting
     if (!req.session.loggedIn) {
-        res.redirect('/login');
+        res.redirect('/app/community-blogs/login');
         return;
     }
 
@@ -249,7 +250,7 @@ router.get('/posts/:postId/preview', async(req, res) => {
 router.get('/login', (req, res) => {
     // If already logged in, then homepage
     if (req.session.loggedIn) {
-        res.redirect('/');
+        res.redirect('/app/community-blogs/');
         return;
     }
 
@@ -269,7 +270,7 @@ router.get('/signup', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    res.redirect("/api/logout");
+    res.redirect("/app/community-blogs/api/logout");
 });
 
 module.exports = router;

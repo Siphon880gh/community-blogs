@@ -2,7 +2,7 @@
     {{#each posts}}
     <div class="dashboard-post-wrapper" data-postid="{{id}}" data-userid="{{user_id}}">
         <header class="post-header">
-            <a href="javascript:void(0);" onclick="let postid = this.closest('.dashboard-post-wrapper').dataset.postid; document.location.pathname = `/posts/${postid}/preview`;">{{title}}</a>
+            <a href="javascript:void(0);" onclick="let postid = this.closest('.dashboard-post-wrapper').dataset.postid; document.location.href = `/app/community-blogs/posts/${postid}/preview`;">{{title}}</a>
             <aside>
                 {{date createdAt}}
             </aside>
@@ -10,6 +10,6 @@
     </div> <!-- dashboard-post-wrapper -->
     {{/each}}
     <footer class="dashboard-btn-wrapper">
-        <a href="/posts/new"><button data-route="/posts/new">+ New Post</button></a>
+        <a href="/app/community-blogs/posts/new"><button data-route="/app/community-blogs/posts/new">+ New Post</button></a>
     </footer>
 </div> <!-- dashboard-posts-wrapper -->
