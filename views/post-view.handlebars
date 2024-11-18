@@ -31,7 +31,7 @@
                                 <textarea id="add-comment-input" class="editing"></textarea>
                             </div>
     
-                            <button class="add-comment standout" type="submit" data-route="/app/community-blogs/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
+                            <button class="add-comment standout" type="submit" data-route="/app/community-tech-blogs/posts/:postId/comments, POST: postId, content[add-comment-input], sessionUserId ">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -50,7 +50,7 @@ function loginWithCallback() {
     document.location.href = "/login?callback=" + document.location.pathname;
 }
 function login() {
-    document.location.href = "/app/community-blogs/login";
+    document.location.href = "/app/community-tech-blogs/login";
 }
 
 // Submit comment
@@ -72,7 +72,7 @@ $(".form-add-comment").on("submit", (event)=>{
     // Future todo could be to make it render dynamically once user submits the comment.
     // const refreshUrl = document.location.pathname;
 
-    $.post(`/app/community-blogs/api/posts/${postid}/comments`, data).always(data=> {
+    $.post(`/app/community-tech-blogs/api/posts/${postid}/comments`, data).always(data=> {
         if(data.success) {
             window.location.reload();
         } else {

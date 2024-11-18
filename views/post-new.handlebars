@@ -14,7 +14,7 @@
                     <textarea id="new-content" class="editing">{{content}}</textarea>
                 </div>
                 <div class="preview-buttons">
-                    <button class="create-post standout" data-route="/app/community-blogs/api/posts, POST: title, content, userId">Create</button>
+                    <button class="create-post standout" data-route="/app/community-tech-blogs/api/posts, POST: title, content, userId">Create</button>
                 </div>
             </form>
         </div> <!-- post-body -->
@@ -30,9 +30,9 @@ $(".form-new-post").on("submit", async(event)=>{
     let content = $("#new-content").val();
 
     if (title && content) {
-        $.post("/app/community-blogs/api/posts", {title, content}).always(data=>{
+        $.post("/app/community-tech-blogs/api/posts", {title, content}).always(data=>{
             if(data.success) {
-                document.location.href = "/app/community-blogs/dashboard";
+                document.location.href = "/app/community-tech-blogs/dashboard";
             } else {
                 alert(data.error);
             }

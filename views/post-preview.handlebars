@@ -14,8 +14,8 @@
                     <textarea id="edit-content" class="editing">{{content}}</textarea>
                 </div>
                 <div class="preview-buttons">
-                    <button class="update-post-btn standout" data-route="/app/community-blogs/api/posts/:postId, PUT: title, content, postId">Update Post</button>
-                    <button class="delete-post-btn standout" data-route="/app/community-blogs/api/posts/:postId, DELETE">Delete</button>
+                    <button class="update-post-btn standout" data-route="/app/community-tech-blogs/api/posts/:postId, PUT: title, content, postId">Update Post</button>
+                    <button class="delete-post-btn standout" data-route="/app/community-tech-blogs/api/posts/:postId, DELETE">Delete</button>
                 </div>
             </div>
         </div> <!-- post-body -->
@@ -39,9 +39,9 @@ $(".form__update__delete .update-post-btn").on("click", ()=>{
         content
     }
 
-    $.ajax({method:"PUT", url: "/app/community-blogs/api/posts/:postId", data}).always(data=>{
+    $.ajax({method:"PUT", url: "/app/community-tech-blogs/api/posts/:postId", data}).always(data=>{
         if(data.success) {
-            document.location.href = "/app/community-blogs/dashboard";
+            document.location.href = "/app/community-tech-blogs/dashboard";
         } else {
             alert(data.error);
         }
@@ -63,9 +63,9 @@ $(".form__update__delete .delete-post-btn").on("click", ()=>{
         content
     }
 
-    $.ajax({method:"DELETE", url: "/app/community-blogs/api/posts/:postId", data}).always(data=>{
+    $.ajax({method:"DELETE", url: "/app/community-tech-blogs/api/posts/:postId", data}).always(data=>{
         if(data.success) {
-            document.location.pathname = "/app/community-blogs/dashboard";
+            document.location.pathname = "/app/community-tech-blogs/dashboard";
         } else {
             alert(data.error);
         }

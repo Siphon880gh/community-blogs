@@ -13,7 +13,7 @@ idle({
         let isLoggedIn = $(".loggedInUser").length;
         if (isLoggedIn) {
             alert("Logging out for inactivity...");
-            document.location.href = "/app/community-blogs/logout";
+            document.location.href = "/app/community-tech-blogs/logout";
         }
     }
 }).start();
