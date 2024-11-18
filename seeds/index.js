@@ -17,39 +17,29 @@ const seedAll = async() => {
             password: 'test'
         },
         {
-            username: 'test2', // id 2
-            password: 'test2',
-            email: 'test2@test.com'
-        },
-        {
-            username: 'test3', // id 3
-            password: 'test3',
-            email: 'test3@test.com'
+            username: 'weng', // id 2
+            password: 'weng',
+            email: 'weng@wengindustries.com'
         }
     ], { individualHooks: true });
 
     console.log("b. Now there are users, you can have post");
     await Post.bulkCreate([{
-            title: 'title 1', // id 1
-            content: 'content 1',
-            user_id: 1
-        },
-        {
-            title: 'title 2', // id 2
-            content: 'content 2',
+            title: 'Welcome', // id 1
+            content: 'This is a tech blog by Weng. Here we will post tutorials on different programming subjects. You can also join in on the fun by creating an account and contributing posts!',
             user_id: 2
         },
         {
-            title: 'title 3', // id 3
-            content: 'content 3',
-            user_id: 3
+            title: 'Moved to Devbrain', // id 2
+            content: 'It is Weng. I have decided this may not be the best platform for sharing programming notes. I deleted all previous tutorials and moved them here at <a href="https://codingnotes.dev" target="_blank">CodingNotes.Dev</a>. There is a link to the Github repository so you can make pull requests and I will accept programming tutorial contributions. Thank you - Weng.',
+            user_id: 2
         }
     ]);
     console.log("c. Now there are users, you can have comments");
     await Comment.bulkCreate([{
-        content: 'comment 1', // id 1
-        post_id: 1,
-        user_id: 2
+        content: 'And the web app there has more interactive elements that make reading notes easier!', // id 1
+        post_id: 2,
+        user_id: 1
     }]);
 
 

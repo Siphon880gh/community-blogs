@@ -1,16 +1,20 @@
 Community Blogs
 ====
-![Last Commit](https://img.shields.io/github/last-commit/Siphon880gh/community-blogs/master)  <a href="https://www.youtube.com/user/Siphon880yt/" rel="nofollow"><img src="https://camo.githubusercontent.com/0bf5ba8ac9f286f95b2a2e86aee46371e0ac03d38b64ee2b78b9b1490df38458/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f596f75747562652d7265643f7374796c653d666c6174266c6f676f3d796f7574756265266c6162656c436f6c6f723d726564" alt="Linked-In" data-canonical-src="https://img.shields.io/badge/Youtube-red?style=flat&amp;logo=youtube&amp;labelColor=red" style="max-width:100%;"></a>  <a href="https://www.linkedin.com/in/weng-fung/" rel="nofollow" target="_blank"><img src="https://camo.githubusercontent.com/0f56393c2fe76a2cd803ead7e5508f916eb5f1e62358226112e98f7e933301d7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c696e6b6564496e2d626c75653f7374796c653d666c6174266c6f676f3d6c696e6b6564696e266c6162656c436f6c6f723d626c7565" alt="Linked-In" data-canonical-src="https://img.shields.io/badge/LinkedIn-blue?style=flat&amp;logo=linkedin&amp;labelColor=blue" style="max-width:100%;"></a>  <a href="https://www.paypal.com/donate?business=T42BK25TYPZSA&item_name=Buy+me+coffee+%28I+develop+free+apps%29&currency_code=USD" target="_blank" title="Donate to this project using Buy Me A Coffee" alt="Paypal"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg" alt="Buy Me A Coffee donate button" /></a>
+![Last Commit](https://img.shields.io/github/last-commit/Siphon880gh/community-tech-blogs/master)
+<a target="_blank" href="https://github.com/Siphon880gh" rel="nofollow"><img src="https://img.shields.io/badge/GitHub--blue?style=social&logo=GitHub" alt="Github" data-canonical-src="https://img.shields.io/badge/GitHub--blue?style=social&logo=GitHub" style="max-width:8.5ch;"></a>
+<a target="_blank" href="https://www.linkedin.com/in/weng-fung/" rel="nofollow"><img src="https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin&labelColor=blue" alt="Linked-In" data-canonical-src="https://img.shields.io/badge/LinkedIn-blue?style=flat&amp;logo=linkedin&amp;labelColor=blue" style="max-width:10ch;"></a>
+<a target="_blank" href="https://www.youtube.com/@WayneTeachesCode/" rel="nofollow"><img src="https://img.shields.io/badge/Youtube-red?style=flat&logo=youtube&labelColor=red" alt="Youtube" data-canonical-src="https://img.shields.io/badge/Youtube-red?style=flat&amp;logo=youtube&amp;labelColor=red" style="max-width:10ch;"></a>
 
 Description
 ---
-By Weng Fei Fung. Community Blogs is a CMS that lets you and other contributors sign up and post articles. Simple, unimposing, and easily installed. 
+By Weng Fei Fung. The idea of a Community Tech Blog is other contributors can sign up and post programming tutorial articles. Simple, unimposing, and easily installed. 
 
-The blog times out and logs you out after 2 minutes of idleness.
+<b>Deprecated</b>: I have decided this may not be the best platform for sharing programming notes. I deleted all previous tutorials and moved them to <a href="https://codingnotes.dev" target="_blank">CodingNotes.Dev</a>. There is a link to the Github repository so you can make pull requests and I will accept programming tutorial contributions. Thank you.
+
 
 Demo
 ---
-[Try it out now!](https://community-blogs-wff.herokuapp.com/)
+[Try it out now!](https://wengindustries.com/app/community-tech-blogs/)
 
 Screenshot
 ---
@@ -50,6 +54,8 @@ Usage
 1. Run `npm start`
 2. It will mention the port being listend at. Open your web-browser and go to the localhost:port, eg. localhost:3001
 3. Or you can also deploy to other servers such as Heroku (you need the JawsDB addon).
+
+Note if you're idled for 1 min, you will be logged out. That can be adjusted at `public/assets/js/idle.js`.
 
 Contribution
 ---
